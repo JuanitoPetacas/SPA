@@ -4,7 +4,7 @@ class MySql
     private $hostname = "localhost";
     private $username = "root";
     private $password = "";
-    private $database = "db_tienda";
+    private $database = "bd_spa";
 
     private $cnn;
 
@@ -29,11 +29,6 @@ class MySql
             return false;
         }
     }
-
-
-
-
-
 
 /* Método ConsultaSimple($consulta):
 Este método se utiliza para ejecutar consultas SQL simples (como INSERT, UPDATE o DELETE) en la base de datos.*/
