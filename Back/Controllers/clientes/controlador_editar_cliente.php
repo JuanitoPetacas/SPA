@@ -13,7 +13,7 @@ $conexion->Conectar();
 
 try {
     $consulta = "UPDATE clientes SET nombre = :nombre, apellido = :apellido, direccion = :direccion, correo = :correo, id_Servicio = :id_Servicio WHERE id = :id";
-    $stmt = $conexion->conexion->prepare($consulta);
+    $stmt = $conexion->$conexion->prepare($consulta);
 
     $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
     $stmt->bindParam(':apellido', $apellido, PDO::PARAM_STR);

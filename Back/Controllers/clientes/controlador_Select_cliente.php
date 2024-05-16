@@ -6,7 +6,7 @@ $conexion->Conectar();
 
 try {
    $consulta = "SELECT * FROM clientes";
-   $stmt = $conexion->conexion->prepare($consulta);
+   $stmt = $conexion->$conexion->prepare($consulta);
    $stmt->execute();
 
    $clientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
