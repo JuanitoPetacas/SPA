@@ -1,31 +1,34 @@
-// clientes.js
-fetch('../../back/controllers/clientes/controlador_Select_cliente.php')
+// Hacer una solicitud AJAX al archivo PHP
+fetch('../../Back/Controllers/clientes/controlador_select_cliente.php')
     .then(response => response.json())
     .then(data => {
-        const tablaClientes = document.getElementById('tabla-clientes').getElementsByTagName('tbody')[0];
+        // Crear la tabla HTML
+        let tabla = document.createElement('table');
+        tabla.classList.add('table','table-hover')
 
+        // Crear la fila de encabezados
+        let fila = document.createElement('tr');
+        fila.style.background ='#569863'
+        for (let clave in data[0]) {
+            let encabezado = document.createElement('th');
+            encabezado.textContent = clave;
+            fila.appendChild(encabezado);
+        }
+        tabla.appendChild(fila);    
+
+        // Crear las filas de datos
         data.forEach(cliente => {
-            const fila = document.createElement('tr');
-
-            const celdaId = document.createElement('td');
-            celdaId.textContent = cliente.id;
-            fila.appendChild(celdaId);
-
-            const celdaNombre = document.createElement('td');
-            celdaNombre.textContent = cliente.nombre;
-            fila.appendChild(celdaNombre);
-
-            const celdaEmail = document.createElement('td');
-            celdaEmail.textContent = cliente.email;
-            fila.appendChild(celdaEmail);
-
-            const celdaTelefono = document.createElement('td');
-            celdaTelefono.textContent = cliente.telefono;
-            fila.appendChild(celdaTelefono);
-
-            tablaClientes.appendChild(fila);
+            let fila = document.createElement('tr');
+            fila.style.backgroundColor = '#9ac19f';
+            for (let valor of Object.values(cliente)) {
+                let celda = document.createElement('td');
+                celda.textContent = valor;
+                fila.appendChild(celda);
+            }
+            tabla.appendChild(fila);
         });
+        let container = document.getElementById('container')
+        // Agregar la tabla al documento HTML
+        container.appendChild(tabla);
     })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+    .catch(error => console.error(error));

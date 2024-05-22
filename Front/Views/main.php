@@ -8,27 +8,8 @@
   </head>
   <body>
     
-    <div class="container mt-4 ">
-    <div
-        class="table-responsive-md"
-    >
-        <table
-            class="table table-dark" id="tabla-clientes"
-        >
-            <thead>
-                <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Direccion</th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">id_Servicio</th>
-                </tr>
-            </thead>
-            <tbody>
-           
-            </tbody>
-        </table>
-    </div>
+    <div class="container" id="container">
+
     </div>
     
 
