@@ -29,6 +29,9 @@ fetch('../../Back/Controllers/clientes/controlador_select_cliente.php')
         });
         let container = document.getElementById('container')
         // Agregar la tabla al documento HTML
+       
+    
         container.appendChild(tabla);
+
     })
     .catch(error => console.error(error));

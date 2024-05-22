@@ -1,0 +1,23 @@
+<?php
+include('../../Model/main.php');
+
+$id = $_POST['id'];
+
+$conexion->Conectar();
+
+try {
+    $consulta = "DELETE FROM clientes WHERE id = :id";
+    $stmt = $conexion->prepare($consulta);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $resultado = $stmt->execute();
+
+    if ($resultado) {
+        echo "Registro eliminado correctamente";
+    } else {
+        echo "Error al eliminar el registro";
+    }
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+} finally {
+    $conexion->Desconectar();
+}
