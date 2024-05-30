@@ -3,7 +3,9 @@ include('../../Model/conexion.php');
 
 $id = $_POST['id'];
 
-$conexion = new Conexion();
+
+$conexion = new $conexion();
+$conexion->conectar();
 
 try {
     $consulta = "DELETE FROM clientes WHERE id = :id";

@@ -8,7 +8,9 @@ $direccion = $_POST['direccion'];
 $correo = $_POST['correo'];
 $id_Servicio = $_POST['id_Servicio'];
 
-$conexion = new Conexion();
+$conexion = new $conexion();
+$conexion->conectar();
+
 
 try {
     $consulta = "UPDATE clientes SET nombre = :nombre, apellido = :apellido, direccion = :direccion, correo = :correo, id_Servicio = :id_Servicio WHERE id = :id";
