@@ -1,6 +1,7 @@
+import { SetModal, ShowModal } from './modal.js';
 //settings
 const GetHost = () => {
-    return window.location.origin;
+    return window.location.origin + '/spa';
 };
 const SetTitle = (title) => {
     document.title = 'Spa | ' + title;
@@ -129,8 +130,24 @@ const SetError = (message) => {
         lblErr.innerHTML = '';
     };
 };
+const SetCatchModal = (err) => {
+    SetModal(
+        `
+        <div class="text-danger">
+            <i class="bi bi-emoji-frown-fill"></i>
+            ERROR IN FETCH
+        </div>
+        `,
+        `Ha ocurrido un fallo con el servidor, te recomendamos <b>recargar la pagina</b><br><span class="fs-6 text-danger">${err}</span>`,
+        `<button type="button" class="btn btn-primary" id="btnReload">Aceptar</button`
+    );
+    document.getElementById('btnReload').addEventListener('click', ()=>{
+        window.location.reload();
+    });
+};
 //functions
-const ValidForm = (form) => {
+const ValidForm = (id) => {
+    var form = document.getElementById(id);
     return form.reportValidity();
 };
 const ConfirmPass = (passValue, confirmPass) => {
@@ -164,6 +181,7 @@ export {
     SetSocialMedia,
     SetFooter,
     SetError,
+    SetCatchModal,
     ValidForm,
     ConfirmPass,
     SetLoading

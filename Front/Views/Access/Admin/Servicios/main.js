@@ -3,23 +3,22 @@ import {} from '../Assets/Helper/Admin.Layout.js';
 import { SetAsideActive } from '../../Utils/asidebar.js';
 import { DefaultOptions, SetColumns, FillTable } from '../Assets/Js/table.js';
 import { SetModal, ShowModal } from '../../../Assets/Js/modal.js';
-SetTitle('Clientes');
-SetAsideActive('Clientes');
+SetTitle('Servicios');
+SetAsideActive('Servicios');
 //Set columns
 const Columns = [
     'Id',
-    'Nombre',
-    'Apellidos',
-    'Dirección',
-    'Correo',
-    'Servicio',
+    'Descripción',
+    'Duración',
+    'Valor',
+    'Terapeuta',
     ''
 ];
 const btnNuevo = document.getElementById('btnNuevo');
 const dataTable = document.getElementById('dataTable');
 const GetData = async () => {
     //Set controller
-    var response = await fetch(`${GetHost()}/Back/Controllers/clientes/controlador_Select_cliente.php`);
+    var response = await fetch('Clientes.json');
     if (response.ok) {
         var data = await response.json();
         //Fill table, valid buttons
@@ -32,35 +31,31 @@ const GetData = async () => {
                     `
                     <div class="text-info">
                         <i class="bi bi-pencil-square"></i>
-                        Editar Cliente
+                        Editar Servicio
                     </div>
                     `,
                     `
                     <form id="frmEditar">
                         <div class="row flex-column">
+                            <div class="col mb-2">
+                                <label class="ms-1 mb-1 text-black-50" for="descripcionServicio">Descripción</label>
+                                <input class="form-control" type="text" name="descripcion_Servicio" id="descripcionServicio" value="${dataNode[1].innerText}" required>
+                            </div>
                             <div class="col">
                                 <div class="row row-cols-1 row-cols-md-2">
                                     <div class="col mb-2">
-                                        <label class="ms-1 mb-1 text-black-50" for="nombre">Nombre</label>
-                                        <input class="form-control" type="text" name="nombre" id="nombre" value="${dataNode[1].innerText}" required>
+                                        <label class="ms-1 mb-1 text-black-50" for="duracion">Duración</label>
+                                        <input class="form-control" type="text" name="duracion" id="duracion" value="${dataNode[2].innerText}" required>
                                     </div>
                                     <div class="col mb-2">
-                                        <label class="ms-1 mb-1 text-black-50" for="apellido">Apellido</label>
-                                        <input class="form-control" type="text" name="apellido" id="apellido" value="${dataNode[2].innerText}" required>
+                                        <label class="ms-1 mb-1 text-black-50" for="valorServicio">Valor</label>
+                                        <input class="form-control" type="number" name="valor_Servicio" id="valorServicio" value="${dataNode[3].innerText}" required>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col mb-2">
-                                <label class="ms-1 mb-1 text-black-50" for="direccion">Dirección</label>
-                                <input class="form-control" type="text" name="direccion" id="direccion" value="${dataNode[3].innerText}" required>
-                            </div>
-                            <div class="col mb-2">
-                                <label class="ms-1 mb-1 text-black-50" for="correo">Correo</label>
-                                <input class="form-control" type="email" name="correo" id="correo" value="${dataNode[4].innerText}" required>
-                            </div>
                             <div class="col">
-                                <label class="ms-1 mb-1 text-black-50" for="idServicio">Servicio</label>
-                                <select class="form-select" name="id_Servicio" id="idServicio"></select>
+                                <label class="ms-1 mb-1 text-black-50" for="idTerapeuta">Terapeuta</label>
+                                <select class="form-select" name="id_Terapeuta" id="idTerapeuta"></select>
                             </div>
                         </div>
                     </form>
@@ -99,11 +94,11 @@ const GetData = async () => {
                     `
                     <div class="text-info">
                         <i class="bi bi-trash-fill"></i>
-                        Eliminar Cliente
+                        Eliminar Servicio
                     </div>
                     `,
                     `
-                    ¿Seguro que quieres eliminar a "<b>${dataNode[1].innerText} ${dataNode[2].innerText}</b>"?
+                    ¿Seguro que quieres eliminar a "<b>${dataNode[1].innerText}</b>"?
                     `,
                     `
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -153,35 +148,31 @@ btnNuevo.addEventListener('click', ()=>{
         `
         <div class="text-primary">
             <i class="bi bi-plus-lg"></i>
-            Agregar Cliente
+            Agregar Servicio
         </div>
         `,
         `
         <form id="frmNuevo">
             <div class="row flex-column">
+                <div class="col mb-2">
+                    <label class="ms-1 mb-1 text-black-50" for="descripcionServicio">Descripción</label>
+                    <input class="form-control" type="text" name="descripcion_Servicio" id="descripcionServicio" required>
+                </div>
                 <div class="col">
                     <div class="row row-cols-1 row-cols-md-2">
                         <div class="col mb-2">
-                            <label class="ms-1 mb-1 text-black-50" for="nombre">Nombre</label>
-                            <input class="form-control" type="text" name="nombre" id="nombre" required>
+                            <label class="ms-1 mb-1 text-black-50" for="valorServicio">Valor</label>
+                            <input class="form-control" type="number" name="valor_Servicio" id="valorServicio" required>
                         </div>
                         <div class="col mb-2">
-                            <label class="ms-1 mb-1 text-black-50" for="apellido">Apellido</label>
-                            <input class="form-control" type="text" name="apellido" id="apellido" required>
+                            <label class="ms-1 mb-1 text-black-50" for="duracion">Duración</label>
+                            <input class="form-control" type="text" name="duracion" id="duracion" required>
                         </div>
                     </div>
                 </div>
-                <div class="col mb-2">
-                    <label class="ms-1 mb-1 text-black-50" for="direccion">Dirección</label>
-                    <input class="form-control" type="text" name="direccion" id="direccion" required>
-                </div>
-                <div class="col mb-2">
-                    <label class="ms-1 mb-1 text-black-50" for="correo">Correo</label>
-                    <input class="form-control" type="email" name="correo" id="correo" required>
-                </div>
                 <div class="col">
-                    <label class="ms-1 mb-1 text-black-50" for="idServicio">Preferencias</label>
-                    <select class="form-select" name="id_Servicio" id="idServicio"></select>
+                    <label class="ms-1 mb-1 text-black-50" for="idTerapeuta">Terapeuta</label>
+                    <select class="form-select" name="id_Terapeuta" id="idTerapeuta"></select>
                 </div>
             </div>
         </form>
@@ -196,18 +187,12 @@ btnNuevo.addEventListener('click', ()=>{
     btnGuardar.addEventListener('click', ()=>{
         if (ValidForm('frmNuevo')) {
             SetLoading(btnGuardar);
-            var formData = new FormData(document.getElementById('frmNuevo'));
-            var object = {};
-            formData.forEach((value, key) => {
-                object[key] = value;
-            });
             //Set controller and send data for body
-            fetch(`${GetHost()}/Back/Controllers/clientes/controlador_insertar_cliente.php`, {
+            fetch('', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(object)
+                }
             }).then(response => response.json())
             .then(data => {
                 //Manipulate data

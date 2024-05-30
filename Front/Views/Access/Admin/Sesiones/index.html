@@ -12,48 +12,34 @@
     </div>
     <main class="row">
         <aside class="col-auto border border-secondary px-0">
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                    <a class="nav-link link-light text-start fs-5 bg-dark rounded-0 px-5" href="">
-                        <i class="bi bi-people-fill"></i>
-                        Clientes
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link link-dark text-start fs-5 bg-light rounded-0 px-5" href="">
-                        <i class="bi bi-people-fill"></i>
-                        Usuarios
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link link-dark text-start fs-5 bg-light rounded-0 px-5" href="">
-                        <i class="bi bi-people-fill"></i>
-                        Empleados
-                    </a>
-                </li>
-            </ul>
+            <ul class="nav nav-pills flex-column" id="asideBar"></ul>
         </aside>
         <div class="col">
-            <div class="row p-5 pb-3
-            ">
+            <div class="row p-5 pb-4">
+                <h1>Gestión de Sesiones</h1>
+            </div>
+            <div class="row px-5">
                 <div class="col-auto">
-                    <button class="btn btn-outline-info fw-bold border-3" type="button">
+                    <button class="btn btn-info fw-bold border-3" type="button" id="btnNuevo">
                         <i class="bi bi-plus-lg"></i>
                         Nuevo
                     </button>
                 </div>
             </div>
-            <div class="row p-5 pt-0">
+            <div class="row p-5 pt-3">
                 <div class="col">
+                    <div class="table-responsive">
                         <table id="dataTable" class="table table-hover w-100">
-                            <thead></thead>
+                            <thead class="table-dark"></thead>
                             <tbody></tbody>
                         </table>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
     <footer class="row"></footer>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"></div>
     <script src="../../../Assets/Js/bootstrap.bundle.min.js"></script>
     <script src="../../Utils/datatables.min.js"></script>
     <script type="module" src="main.js"></script>
