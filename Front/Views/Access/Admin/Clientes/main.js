@@ -33,7 +33,6 @@ const GetData = async () => {
         //Fill table, valid buttons
         FillTable(dataTable, data, 'ambos');
         SetButtons();
-        let table = new DataTable('#dataTable', DefaultOptions);
     } else {
         SetModal(
             `
@@ -47,6 +46,7 @@ const GetData = async () => {
         );
         ShowModal();
     };
+    let table = new DataTable('#dataTable', DefaultOptions);
 };
 const SetButtons = () => {
     var btnEdit = document.querySelectorAll('.btn-outline-info');

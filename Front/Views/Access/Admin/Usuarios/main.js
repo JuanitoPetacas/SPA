@@ -17,7 +17,7 @@ const Columns = [
 const btnNuevo = document.getElementById('btnNuevo');
 const dataTable = document.getElementById('dataTable');
 let arrayRoles = [];
-fetch(`${GetHost()}/Back/Controllers/spaEmpelados/usuarios/controlador_rol_usuario.php`).then(response => response.json())
+fetch(`${GetHost()}/Back/Controllers/spaEmpelados/roles/controlador_select_rol.php`).then(response => response.json())
     .then(data => {
         arrayRoles = data;
     })
@@ -32,7 +32,6 @@ const GetData = async () => {
         //Fill table, valid buttons
         FillTable(dataTable, data, 'ambos');
         SetButtons();
-        let table = new DataTable('#dataTable', DefaultOptions);
     } else {
         SetModal(
             `
@@ -46,6 +45,7 @@ const GetData = async () => {
         );
         ShowModal();
     };
+    let table = new DataTable('#dataTable', DefaultOptions);
 };
 const SetButtons = () => {
     var btnEdit = document.querySelectorAll('.btn-outline-info');
