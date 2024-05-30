@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 include('../../../Model/conexion.php');
 
 $nombre = $_POST['nombre'];
 $apellido = $_POST['apellido'];
 $correo = $_POST['correo'];
-$id_Rol = $_POST['$id_Rol'];
+$id_Rol = $_POST['id_Rol'];
 
 $conexion = new conexion();
 $conexion->conectar();
@@ -13,10 +13,10 @@ $conexion->conectar();
 try {
     $consulta = "UPDATE citas SET nombre =:nombre, apellido = :apellido, correo = :correo, id_Rol = :id_Rol )";
     $stmt = $conexion->prepare($consulta);
-    $stmt->bindParam(':nombre',$nombre, PDO::PARAM_STR);
-    $stmt->bindParam(':apellido',$apellido, PDO::PARAM_STR);
-    $stmt->bindParam(':correo',$correo, PDO::PARAM_STR);
-    $stmt->bindParam(':id_Rol',$id_Rol, PDO::PARAM_INT);
+    $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+    $stmt->bindParam(':apellido', $apellido, PDO::PARAM_STR);
+    $stmt->bindParam(':correo', $correo, PDO::PARAM_STR);
+    $stmt->bindParam(':id_Rol', $id_Rol, PDO::PARAM_INT);
     $resultado = $stmt->execute();
 
     if ($resultado) {

@@ -4,7 +4,7 @@ include('../../../Model/conexion.php');
 $conexion = new Conexion();
 
 try {
-    $consulta = 'SELECT usuarios.id, nombre, apellido, correo, roles.descripcion FROM usuarios INNER JOIN roles ON usuarios.id_Rol = roles.id;';
+    $consulta = 'SELECT id, descripcion FROM roles ';
     $usuario = $conexion->ConsultaCompleja($consulta);
     echo json_encode($usuario);
 } catch (PDOException $e) {
