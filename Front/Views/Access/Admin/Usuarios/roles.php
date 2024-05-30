@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../Utils/datatables.min.css">
 </head>
+
 <body class="container-fluid">
     <header class="row"></header>
     <div class="row">
@@ -25,7 +27,7 @@
                             <a class="nav-link fs-5 link-secondary" href="./">Usuarios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fs-5 active" href="./roles.html">Roles</a>
+                            <a class="nav-link fs-5 active" href="./roles.php">Roles</a>
                         </li>
                     </ul>
                 </div>
@@ -56,4 +58,5 @@
     <script src="../../Utils/datatables.min.js"></script>
     <script type="module" src="roles.js"></script>
 </body>
+
 </html>

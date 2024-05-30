@@ -141,11 +141,45 @@ const SetCatchModal = (err) => {
         `Ha ocurrido un fallo con el servidor, te recomendamos <b>recargar la pagina</b><br><span class="fs-6 text-danger">${err}</span>`,
         `<button type="button" class="btn btn-primary" id="btnReload">Aceptar</button`
     );
-    document.getElementById('btnReload').addEventListener('click', ()=>{
+    document.getElementById('btnReload').addEventListener('click', () => {
         window.location.reload();
     });
 };
+function SetSucessModal(message) {
+    SetModal(
+        `
+        <div class="text-success">
+            <i class="bi bi-emoji-smile-fill"></i>
+            ¡Felicidades!
+        </div>
+        `,
+        message,
+        `
+        <button type="button" class="btn btn-primary" id="btnReload">Aceptar</button>
+        `
+    );
+    document.getElementById('btnReload').addEventListener('click', () => {
+        window.location.reload();
+    })
+};
 //functions
+const FillSelect = (id, json) => {
+    var select = document.getElementById(id);
+    select.innerHTML = `<option value="">Seleccionar...</option>`;
+    json.forEach(item => {
+        select.innerHTML += `
+        <option value="${item.id}">${item.descripcion_servicio}</option>
+        `;
+    });
+};
+const SetSelectOpt = (id, opt) => {
+    var select = document.getElementById(id);
+    select.childNodes.forEach(item => {
+        if (opt == item.innerText) {
+            select.selectedIndex = item.index;
+        };
+    });
+};
 const ValidForm = (id) => {
     var form = document.getElementById(id);
     return form.reportValidity();
@@ -182,6 +216,9 @@ export {
     SetFooter,
     SetError,
     SetCatchModal,
+    SetSucessModal,
+    FillSelect,
+    SetSelectOpt,
     ValidForm,
     ConfirmPass,
     SetLoading
