@@ -1,22 +1,22 @@
 <?php
 include('../../../Model/conexion.php');
 
-$id = $_POST['id'];
-
+$descripcion = $_POST['descripcion'];
 
 $conexion = new conexion();
 $conexion->conectar();
 
+
 try {
-    $consulta = "DELETE FROM usuarios WHERE id = :id";
+    $consulta = "INSERT INTO roles (descripcion) VALUES (:descripcion)";
     $stmt = $conexion->prepare($consulta);
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
     $resultado = $stmt->execute();
 
     if ($resultado) {
-        echo "Registro eliminado correctamente";
+        echo "Descripcion Creada Exitosamente";
     } else {
-        echo "Error al eliminar el registro";
+        echo "Error en la consulta";
     }
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
