@@ -167,8 +167,12 @@ const FillSelect = (id, json) => {
     var select = document.getElementById(id);
     select.innerHTML = `<option value="">Seleccionar...</option>`;
     json.forEach(item => {
+        var arrayValues = [];
+        Object.keys(item).forEach(key => {
+            arrayValues.push(item[key]);
+        });
         select.innerHTML += `
-        <option value="${item.id}">${item.descripcion_servicio}</option>
+        <option value="${arrayValues[0]}">${arrayValues[1]}</option>
         `;
     });
 };

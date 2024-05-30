@@ -1,4 +1,4 @@
-import { GetHost, SetTitle, SetError, SetCatchModal, SetLoading, ValidForm } from '../../../Assets/Js/globals.functions.js';
+import { GetHost, SetTitle, SetError, SetCatchModal, SetSucessModal, SetLoading, FillSelect, SetSelectOpt, ValidForm } from '../../../Assets/Js/globals.functions.js';
 import { } from '../Assets/Helper/Admin.Layout.js';
 import { SetAsideActive } from '../../Utils/asidebar.js';
 import { DefaultOptions, SetColumns, FillTable } from '../Assets/Js/table.js';
@@ -19,7 +19,6 @@ const dataTable = document.getElementById('dataTable');
 let arrayRoles = [];
 fetch(`${GetHost()}/Back/Controllers/spaEmpelados/usuarios/controlador_rol_usuario.php`).then(response => response.json())
     .then(data => {
-        console.log(data);
         arrayRoles = data;
     })
     .catch(err => {
@@ -27,11 +26,11 @@ fetch(`${GetHost()}/Back/Controllers/spaEmpelados/usuarios/controlador_rol_usuar
     })
 const GetData = async () => {
     //Set controller
-    var response = await fetch(`${GetHost()}/Back/Controllers/spaEmpelados/usuarios/controlador_select_usuario.php`);
+    var response = await fetch(`${GetHost()}/Back/Controllers/spaEmpelados/usuarios/controlador_Select_usuario.php`);
     if (response.ok) {
         var data = await response.json();
         //Fill table, valid buttons
-        FillTable(dataTable, data, true);
+        FillTable(dataTable, data, 'ambos');
         SetButtons();
         let table = new DataTable('#dataTable', DefaultOptions);
     } else {
@@ -47,7 +46,6 @@ const GetData = async () => {
         );
         ShowModal();
     };
-    let table = new DataTable('#dataTable', DefaultOptions);
 };
 const SetButtons = () => {
     var btnEdit = document.querySelectorAll('.btn-outline-info');
@@ -58,7 +56,7 @@ const SetButtons = () => {
                 `
                 <div class="text-info">
                     <i class="bi bi-pencil-square"></i>
-                    Editar Cliente
+                    Editar Usuario
                 </div>
                 `,
                 `
@@ -78,7 +76,7 @@ const SetButtons = () => {
                         </div>
                         <div class="col mb-2">
                             <label class="ms-1 mb-1 text-black-50" for="correo">Correo</label>
-                            <input class="form-control" type="email" name="correo" id="correo" value="${dataNode[4].innerText}" required>
+                            <input class="form-control" type="email" name="correo" id="correo" value="${dataNode[3].innerText}" required>
                         </div>
                         <div class="col">
                             <label class="ms-1 mb-1 text-black-50" for="idRol">Servicio</label>
@@ -93,7 +91,7 @@ const SetButtons = () => {
                 `
             );
             FillSelect('idRol', arrayRoles);
-            SetSelectOpt('idRol', dataNode[5].innerText)
+            SetSelectOpt('idRol', dataNode[4].innerText)
             ShowModal();
             var btnEditar = document.getElementById('btnEditar');
             btnEditar.addEventListener('click', () => {
@@ -169,7 +167,7 @@ btnNuevo.addEventListener('click', () => {
         `
         <div class="text-primary">
             <i class="bi bi-plus-lg"></i>
-            Agregar Cliente
+            Agregar Usuario
         </div>
         `,
         `
