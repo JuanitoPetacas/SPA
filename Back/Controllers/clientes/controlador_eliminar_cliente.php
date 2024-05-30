@@ -4,12 +4,12 @@ include('../../Model/conexion.php');
 $id = $_POST['id'];
 
 
-$conexion = new $conexion();
+$conexion = new conexion();
 $conexion->conectar();
 
 try {
     $consulta = "DELETE FROM clientes WHERE id = :id";
-    $stmt = $conexion->conexion->prepare($consulta);
+    $stmt = $conexion->prepare($consulta);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $resultado = $stmt->execute();
 

@@ -8,7 +8,7 @@ $direccion = $_POST['direccion'];
 $correo = $_POST['correo'];
 $id_Servicio = $_POST['id_Servicio'];
 
-$conexion = new $conexion();
+$conexion = new conexion();
 $conexion->conectar();
 
 
@@ -24,7 +24,7 @@ try {
     $resultado = $stmt->execute();
 
     if ($resultado) {
-        echo "Consulta ejecutada correctamente";
+        echo $nombre." ".$apellido." editado Exitosamente";
     } else {
         echo "Error en la consulta";
     }
