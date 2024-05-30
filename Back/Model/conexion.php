@@ -29,6 +29,10 @@ class Conexion {
         }
     }
 
+    public function prepare($sql) {
+        return $this->conexion->prepare($sql);
+    }
+
     
     public function ConsultaSimple($consulta)
     {
