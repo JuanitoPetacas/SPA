@@ -1,5 +1,5 @@
 import { GetHost, SetTitle, SetError, SetCatchModal, SetLoading, ValidForm } from '../../../Assets/Js/globals.functions.js';
-import {} from '../Assets/Helper/Admin.Layout.js';
+import { } from '../Assets/Helper/Admin.Layout.js';
 import { SetAsideActive } from '../../Utils/asidebar.js';
 import { DefaultOptions, SetColumns, FillTable } from '../Assets/Js/table.js';
 import { SetModal, ShowModal } from '../../../Assets/Js/modal.js';
@@ -26,7 +26,7 @@ const GetData = async () => {
         FillTable(dataTable, data, true);
         var btnEdit = document.querySelectorAll('.btn-outline-info');
         btnEdit.forEach(item => {
-            item.addEventListener('click', ()=>{
+            item.addEventListener('click', () => {
                 var dataNode = item.parentElement.parentElement.parentElement.parentElement.childNodes;
                 SetModal(
                     `
@@ -72,29 +72,35 @@ const GetData = async () => {
                 );
                 ShowModal();
                 var btnEditar = document.getElementById('btnEditar');
-                btnEditar.addEventListener('click', ()=>{
+                btnEditar.addEventListener('click', () => {
                     if (ValidForm('frmEditar')) {
                         SetLoading(btnEditar);
+                        var formData = new FormData(document.getElementById('frmNuevo'));
+                        var object = {};
+                        formData.forEach((value, key) => {
+                            object[key] = value;
+                        });
                         //Set controller and send data for body
-                        fetch('', {
+                        fetch(`${GetHost()}/Back/Controllers/clientes/controlador_editar_cliente.php`, {
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json'
-                            }
+                            },
+                            body: object
                         }).then(response => response.json())
-                        .then(data => {
-                            //Manipulate data
-                        }).catch(err => {
-                            SetCatchModal(err);
-                        })
+                            .then(data => {
+                                //Manipulate data
+                            }).catch(err => {
+                                SetCatchModal(err);
+                            })
                     };
                 });
             });
         });
         var btnDelete = document.querySelectorAll('.btn-danger');
         btnDelete.forEach(item => {
-            item.addEventListener('click', ()=>{
-                var dataNode = item.parentElement.parentElement.parentElement.parentElement.childNodes;
+            item.addEventListener('click', () => {
+                let dataNode = item.parentElement.parentElement.parentElement.parentElement.childNodes;
                 SetModal(
                     `
                     <div class="text-info">
@@ -112,20 +118,20 @@ const GetData = async () => {
                 );
                 ShowModal();
                 var btnEliminar = document.getElementById('btnEliminar');
-                btnEliminar.addEventListener('click', ()=>{
+                btnEliminar.addEventListener('click', () => {
                     SetLoading(btnEliminar);
                     //Set controller and send data for body
-                    fetch('', {
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json'
+                    $.ajax({
+                        url: `${GetHost()}/Back/Controllers/clientes/controlador_eliminar_cliente.php`,
+                        type: 'POST',
+                        data: { id: parseInt(dataNode[0].innerText) },
+                        success: function (data) {
+                            console.log(data);
+                        },
+                        error: function (err) {
+                            SetCatchModal(err);
                         }
-                    }).then(response => response.json())
-                    .then(data => {
-                        //Manipulate data
-                    }).catch(err => {
-                        SetCatchModal(err);
-                    })
+                    });
                 });
             });
         });
@@ -144,11 +150,11 @@ const GetData = async () => {
     };
     let table = new DataTable('#dataTable', DefaultOptions);
 };
-document.addEventListener('DOMContentLoaded', ()=>{
+document.addEventListener('DOMContentLoaded', () => {
     SetColumns(dataTable, Columns);
     GetData();
 });
-btnNuevo.addEventListener('click', ()=>{
+btnNuevo.addEventListener('click', () => {
     SetModal(
         `
         <div class="text-primary">
@@ -193,7 +199,7 @@ btnNuevo.addEventListener('click', ()=>{
     );
     ShowModal();
     var btnGuardar = document.getElementById('btnGuardar');
-    btnGuardar.addEventListener('click', ()=>{
+    btnGuardar.addEventListener('click', () => {
         if (ValidForm('frmNuevo')) {
             SetLoading(btnGuardar);
             var formData = new FormData(document.getElementById('frmNuevo'));
@@ -202,18 +208,17 @@ btnNuevo.addEventListener('click', ()=>{
                 object[key] = value;
             });
             //Set controller and send data for body
-            fetch(`${GetHost()}/Back/Controllers/clientes/controlador_insertar_cliente.php`, {
+            $.ajax({
+                data: object,
+                url: `${GetHost()}/Back/Controllers/clientes/controlador_insertar_cliente.php`,
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
+                success: function (data) {
+                    console.log("melo");
                 },
-                body: JSON.stringify(object)
-            }).then(response => response.json())
-            .then(data => {
-                //Manipulate data
-            }).catch(err => {
-                SetCatchModal(err);
-            })
+                error: function (err) {
+                    SetCatchModal(err);
+                }
+            });
         };
     });
 });

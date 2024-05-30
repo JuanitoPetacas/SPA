@@ -4,7 +4,7 @@ class Conexion {
     private $dbname = "bd_spa";
     private $usuario = "root";
     private $contrasena = "";
-    private $conexion;
+    public $conexion;
 
     public function conectar() {
         try {

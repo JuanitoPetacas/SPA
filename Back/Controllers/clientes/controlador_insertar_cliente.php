@@ -7,7 +7,7 @@ $direccion = $_POST['direccion'];
 $correo = $_POST['correo'];
 $id_Servicio = $_POST['id_Servicio'];
 
-$conexion->Conectar();
+$conexion = new Conexion();
 
 try {
     $consulta = "INSERT INTO clientes (nombre, apellido, direccion, correo, id_Servicio) VALUES (:nombre, :apellido, :direccion, :correo, :id_Servicio)";
