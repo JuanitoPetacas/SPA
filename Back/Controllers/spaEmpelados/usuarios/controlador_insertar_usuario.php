@@ -11,7 +11,7 @@ $conexion = new conexion();
 $conexion->conectar();
 
 try {
-    $consulta = "INSERT INTO citas (nombre, apellido, correo, id_Rol) VALUES (:nombre, :apellido, :correo, :id_Rol )";
+    $consulta = "INSERT INTO usuarios (nombre, apellido, correo, id_Rol) VALUES (:nombre, :apellido, :correo, :id_Rol )";
     $stmt = $conexion->prepare($consulta);
     $stmt->bindParam(':nombre',$nombre, PDO::PARAM_STR);
     $stmt->bindParam(':apellido',$apellido, PDO::PARAM_STR);

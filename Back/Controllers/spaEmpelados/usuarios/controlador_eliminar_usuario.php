@@ -8,7 +8,7 @@ $conexion = new conexion();
 $conexion->conectar();
 
 try {
-    $consulta = "DELETE FROM clientes WHERE id = :id";
+    $consulta = "DELETE FROM usuarios WHERE id = :id";
     $stmt = $conexion->prepare($consulta);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $resultado = $stmt->execute();
