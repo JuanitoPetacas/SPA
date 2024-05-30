@@ -7,6 +7,7 @@ $apellido = $_POST['apellido'];
 $correo = $_POST['correo'];
 $id_Rol = $_POST['$id_Rol'];
 
+$conexion = new conexion();
 $conexion->conectar();
 
 try {

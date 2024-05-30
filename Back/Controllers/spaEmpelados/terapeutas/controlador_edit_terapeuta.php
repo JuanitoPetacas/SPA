@@ -7,6 +7,7 @@ $nombre = $_POST['nombre'];
 $apellido = $_POST['apellido'];
 $especialidad = $_POST['especialidad'];
 
+$conexion = new conexion();
 $conexion->conectar();
 
 try {

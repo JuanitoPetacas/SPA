@@ -7,6 +7,7 @@ $hora_fin = $_POST['hora_Fin'];
 $id_cliente = $_POST['id_Cliente'];
 $id_Servicio = $_POST['id_Servicio'];
 
+$conexion = new conexion();
 $conexion->conectar();
 
 try {
