@@ -31,7 +31,7 @@ const GetData = async () => {
     if (response.ok) {
         var data = await response.json();
         //Fill table, valid buttons
-        FillTable(dataTable, data, 'ambos');
+        FillTable(dataTable, data, 'edit');
         SetButtons();
     } else {
         SetModal(
@@ -121,44 +121,6 @@ const SetButtons = () => {
                         }
                     });
                 };
-            });
-        });
-    });
-    var btnDelete = document.querySelectorAll('.btn-danger');
-    btnDelete.forEach(item => {
-        item.addEventListener('click', () => {
-            let dataNode = item.parentElement.parentElement.parentElement.parentElement.childNodes;
-            SetModal(
-                `
-                <div class="text-info">
-                    <i class="bi bi-trash-fill"></i>
-                    Eliminar Cliente
-                </div>
-                `,
-                `
-                ¿Seguro que quieres eliminar a "<b>${dataNode[1].innerText} ${dataNode[2].innerText}</b>"?
-                `,
-                `
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-danger" id="btnEliminar">Eliminar</button
-                `
-            );
-            ShowModal();
-            var btnEliminar = document.getElementById('btnEliminar');
-            btnEliminar.addEventListener('click', () => {
-                SetLoading(btnEliminar);
-                //Set controller and send data for body
-                $.ajax({
-                    url: `${GetHost()}/Back/Controllers/clientes/controlador_eliminar_cliente.php`,
-                    type: 'POST',
-                    data: { id: parseInt(dataNode[0].innerText) },
-                    success: function (data) {
-                        SetSucessModal(data);
-                    },
-                    error: function (err) {
-                        SetCatchModal(err);
-                    }
-                });
             });
         });
     });
