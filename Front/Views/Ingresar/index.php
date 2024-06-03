@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Assets/Css/styles.css">
 </head>
 <body class="container-fluid bg-body-tertiary">
     <header class="row"></header>
@@ -23,7 +24,7 @@
                         <label for="email">Correo electrónico</label>
                     </div>
                     <div class="form-floating mb-1">
-                        <input type="password" class="form-control rounded-3" name="contraseña" id="contraseña" placeholder="Juan1#23$%" required>
+                        <input type="password" class="form-control rounded-3" name="pass" id="contraseña" placeholder="Juan1#23$%" required>
                         <label for="contraseña">Contraseña</label>
                     </div>
                     <div class="form-check">
@@ -47,5 +48,6 @@
     </main>
     <footer class="row"></footer>
     <script type="module" src="main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>
