@@ -14,35 +14,34 @@ txtConfirmPass.addEventListener('focusout', ()=>{
     });
 });
 btnRegistrarme.addEventListener('click', ()=>{
-    if (ValidForm(document.querySelector('form'))) {
-        SetLoading(btnRegistrarme);
-        //controller
-        fetch('', {
-            method: 'post',
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-            body: formData
-        }).then(res => res.json())
-        .then(data => {
-            // valid login
-            if (data.success) {
-                SetModal(
-                    `
-                    <i class="bi bi-emoji-laughing-fill"></i>
-                    ¡Felicidades!
-                    `,
-                    'Usuario registrado correctamente',
-                    `
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    `
-                );
-                ShowModal();
-            } else {
-                SetError(data.message);
-            };
-        }).catch(err => {
-            SetError(err);
-        });
+    SetLoading(btnRegistrarme);
+    let nombre_Completo = document.getElementById('nombres').value ;
+    let telefono = document.getElementById('telefono').value;
+    let correo = document.getElementById('email').value;
+    let apellidos = document.getElementById('apellidos').value;
+    let password = document.getElementById('password').value;
+    var datos = {
+        nombres: nombre_Completo,
+        apellidos: apellidos,
+        telefono: telefono,
+        email: correo,
+        password: password 
     };
+    $.ajax({
+        data: datos,
+        url: `../../../Back/Controllers/registrarse/registrarse.php`,
+        method: 'POST',
+        success: function (data) {
+            var message = JSON.parse(data)
+            if ( message.message == "Correo ya existe") {
+                window.location.href = "../Ingresar/index.php"
+            }else{
+                // ? Mostrar la modal
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+
 });
