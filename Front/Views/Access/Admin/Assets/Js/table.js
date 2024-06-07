@@ -74,9 +74,11 @@ const FillTable = (dataTable, data, btnOpt) => {
                 tr.innerHTML += `
                 <td>
                     <div class="d-flex justify-content-center">
-                        <button class="btn btn-sm btn-outline-info" type="button">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
+                        <div>
+                            <button class="btn btn-sm btn-outline-info" type="button">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </div>
                     </div>
                 </td>
                 `;
@@ -85,9 +87,11 @@ const FillTable = (dataTable, data, btnOpt) => {
                 tr.innerHTML += `
                 <td>
                     <div class="d-flex justify-content-center">
-                        <button class="btn btn-sm btn-danger" type="button">
-                            <i class="bi bi-trash-fill"></i>
-                        </button>
+                        <div>
+                            <button class="btn btn-sm btn-danger" type="button">
+                                <i class="bi bi-trash-fill"></i>
+                            </button>
+                        </div>
                     </div>
                 </td>
                 `;

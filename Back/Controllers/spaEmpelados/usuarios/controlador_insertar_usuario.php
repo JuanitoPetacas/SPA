@@ -5,7 +5,7 @@ include('../../../Model/conexion.php');
 $nombre = $_POST['nombre'];
 $apellido = $_POST['apellido'];
 $correo = $_POST['correo'];
-$id_Rol = $_POST['$id_Rol'];
+$id_Rol = $_POST['id_Rol'];
 
 $conexion = new conexion();
 $conexion->conectar();
