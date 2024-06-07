@@ -16,4 +16,3 @@ const jsonButtons = [
 ];
 SetAside(jsonButtons);
 SetFooter('footer');
-CreateScript(`${GetHost()}/Front/Views/Assets/Js/bootstrap.bundle.min.js`);
