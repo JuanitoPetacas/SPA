@@ -2,7 +2,6 @@ import { GetHost, SetTitle } from '../../../Assets/Js/globals.functions.js';
 import { } from '../Assets/Helper/Admin.Layout.js';
 import { SetAsideActive } from '../../Utils/asidebar.js';
 import { FillTable } from '../Assets/Js/table.js';
-import { SetModal, ShowModal } from '../../../Assets/Js/modal.js';
 SetTitle('Reportes');
 SetAsideActive('Reportes');
 const Options = {
@@ -53,56 +52,119 @@ const Options = {
         }
     ]
 };
-const dtIngresosTiempo = document.getElementById('dtIngresosTiempo');
-const dtOcupacionTerapeutas = document.getElementById('dtOcupacionTerapeutas');
-const dtClientesFrecuentes = document.getElementById('dtClientesFrecuentes');
-const dtInventarioConsumo = document.getElementById('dtInventarioConsumo');
-const Query = async (URL) => {
-    var response = await fetch(URL);
-    if (response.ok) {
-        var data = await response.json();
-        return data;
-    } else {
-        return null;
-    };
+const clearNavLinks = (navLinks) => {
+    navLinks.forEach(item => {
+        if (item.classList.contains('active')) {
+            item.classList.replace('active', 'link-secondary');
+        };
+    });
 };
-const SetErrAlert = (Err) => {
-    return `
-    <div class="alert alert-danger alert-dismissible mt-4 mb-0" role="alert">
-        <div><b>Ha ocurrido un error al cargar los datos:</b> ${Err}</div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    `;
+const setActiveLinks = (navLinks, text) => {
+    clearNavLinks(navLinks);
+    navLinks.forEach(item => {
+        if (item.textContent.trim() == text) {
+            item.classList.replace('link-secondary', 'active');
+        };
+    });
 };
-// TABLA INGRESOS POR TIEMPO
-Query('').then(data => {
-    FillTable(dtIngresosTiempo, data, '')
-}).catch(err => {
-    document.getElementById('lblIngresosTiempo').innerHTML = SetErrAlert(err);
-}).finally(()=>{
-    new DataTable('#dtIngresosTiempo', Options);
-});
-// TABLA OCUPACIÓN DE TERAPEUTA
-Query('').then(data => {
-    FillTable(dtOcupacionTerapeutas, data, '')
-}).catch(err => {
-    document.getElementById('lblOcupacionTerapeutas').innerHTML = SetErrAlert(err);
-}).finally(()=>{
-    new DataTable('#dtOcupacionTerapeutas', Options);
-});
-// TABLA CLIENTES MÁS FRECUENTES
-Query('').then(data => {
-    FillTable(dtClientesFrecuentes, data, '')
-}).catch(err => {
-    document.getElementById('lblClientesFrecuentes').innerHTML = SetErrAlert(err);
-}).finally(()=>{
-    new DataTable('#dtClientesFrecuentes', Options);
-});
-// TABLA INVENTARIO Y CONSUMO DE PRODUCTOS
-Query('').then(data => {
-    FillTable(dtInventarioConsumo, data, '')
-}).catch(err => {
-    document.getElementById('lblInventarioConsumo').innerHTML = SetErrAlert(err);
-}).finally(()=>{
-    new DataTable('#dtInventarioConsumo', Options);
+let navLinks = document.querySelectorAll('.nav-link.link-secondary');
+const setDataTable = (URL, btnContent, innerHTML, idTable) => {
+    setActiveLinks(navLinks, btnContent);
+    let table = document.getElementById('table');
+    table.innerHTML = innerHTML;
+    let dataTable = document.getElementById(idTable);
+    fetch(URL).then(response => response.json())
+    .then(data => {
+        FillTable(dataTable, data, '')
+    }).catch(err => {
+        console.error(err);
+        document.getElementById('lblError').innerHTML = `
+        <div class="alert bg-danger text-light shadow alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-circle-fill me-2"></i>
+            <strong>Ha ocurrido un error al recibir los datos</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        `;
+    }).finally(()=>{
+        new DataTable(`#${idTable}`, Options);
+    });
+};
+//*
+//* AQUÍ EMPIEZAN LOS ENDPOINTS
+//*
+setDataTable(`${GetHost()}`, 'Ingresos Generados', `
+<table class="table table-light table-hover fs-5 w-100 mb-0" id="dtIngresosTiempo">
+    <thead>
+        <tr>
+            <th>Dia</th>
+            <th>Mes</th>
+            <th>Año</th>
+            <th>Ingreso</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+`, 'dtIngresosTiempo');
+navLinks.forEach(item => {
+    item.addEventListener('click', ()=>{
+        switch (item.textContent.trim()) {
+            case 'Ingresos Generados':
+                setDataTable(`${GetHost()}`, 'Ingresos Generados', `
+                <table class="table table-light table-hover fs-5 w-100 mb-0" id="dtIngresosTiempo">
+                    <thead>
+                        <tr>
+                            <th>Dia</th>
+                            <th>Mes</th>
+                            <th>Año</th>
+                            <th>Ingreso</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                `, 'dtIngresosTiempo');
+                break;
+            case 'Ocupación Terapeutas':
+                setDataTable(`${GetHost()}`, 'Ocupación Terapeutas', `
+                <table class="table table-light table-hover fs-5 w-100 mb-0" id="dtOcupacionTerapeutas">
+                    <thead>
+                        <tr>
+                            <th>Terapeuta</th>
+                            <th>Ocupación</th>
+                            <th>Horarios</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                `, 'dtOcupacionTerapeutas');
+                break;
+            case 'Clientes Frecuentes':
+                setDataTable(`${GetHost()}`, 'Clientes Frecuentes', `
+                <table class="table table-light table-hover fs-5 w-100 mb-0" id="dtClientesFrecuentes">
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Tratamiento</th>
+                            <th>Visitas</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                `, 'dtClientesFrecuentes');
+                break;
+            case 'Consumo Productos':
+                setDataTable(`${GetHost()}`, 'Consumo Productos', `
+                <table class="table table-light table-hover fs-5 w-100 mb-0" id="dtInventarioConsumo">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Stock</th>
+                            <th>Consumidos</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                `, 'dtInventarioConsumo');
+                break;
+        };
+    });
 });

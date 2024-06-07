@@ -28,12 +28,10 @@ const CreateScript = (url) => {
 //components
 const SetHeader = (selector) => {
     document.querySelector(selector).innerHTML = `
-    <div class="bg-dark d-flex justify-content-center">
-        <div class="col-auto">
-            <a class="logo-icon" href="${GetHost()}/Front/Views/Inicio/">
-                <img width="180px" src="${GetHost()}/Front/Views/Assets/Img/Spa_Logo.webp" alt="Spa_Logo">
-            </a>
-        </div>
+    <div class="col-auto mx-auto">
+        <a class="logo-icon" href="${GetHost()}/Front/Views/Inicio/">
+            <img width="180px" src="${GetHost()}/Front/Views/Assets/Img/Spa_Logo.webp" alt="Spa_Logo">
+        </a>
     </div>
     `;
 };
@@ -46,11 +44,11 @@ const SetNavBar = (selector) => {
         navContent = `
         <div class="col col-md-auto ms-auto align-content-center mt-2 mt-md-0">
             <div class="btn-group">
-                <a class="btn btn-light rounded-5 rounded-end-0 fs-5 ps-4" href="${GetHost()}/Front/Views/Ingresar/">
+            <a class="btn btn-lg btn-outline-primary" href="${GetHost()}/Front/Views/Registrarse/">Registrarse</a>
+                <a class="btn btn-lg btn-primary" href="${GetHost()}/Front/Views/Ingresar/">
                     <i class="bi bi-box-arrow-in-right"></i>
                     Ingresar
                 </a>
-                <a class="btn btn-outline-light rounded-5 rounded-start-0 fs-5 pe-4" href="${GetHost()}/Front/Views/Registrarse/">Registrarse</a>
             </div>
         </div>
         `;
@@ -64,7 +62,7 @@ const SetNavBar = (selector) => {
             <div class="container-fluid py-2">
                 <div class="row flex-column flex-md-row">
                     <div class="col-auto">
-                        <a class="nav-link link-light text-center fs-5 p-2" href="${GetHost()}/Front/Views/Inicio/">Inicio</a>
+                        <a class="nav-link link-dark text-center fs-5 p-2" href="${GetHost()}/Front/Views/Inicio/">Inicio</a>
                     </div>
                     ${navContent}
                 </div>
@@ -107,19 +105,19 @@ const SetSocialMedia = (selector) => {
 const SetFooter = (selector) => {
     document.querySelector(selector).innerHTML = `
     <div class="col">
-        <div class="row bg-dark d-flex justify-content-between py-2 px-4">
+        <div class="row d-flex justify-content-between py-2 px-4">
             <div class="col-auto">
-                <p class="text-light fw-bold mb-0">Front-end by <a class="fw-normal link-light text-decoration-none link-opacity-75 link-opacity-100-hover" href="https://github.com/JohnFRivera" target="_blank">John Freddy Rivera Ayala &copy;</a></p>
+                <p class="fw-bold mb-0">Front-end by <a class="fw-semibold link-dark text-decoration-none link-opacity-75 link-opacity-100-hover" href="https://github.com/JohnFRivera" target="_blank">John Freddy Rivera Ayala &copy;</a></p>
             </div>
             <div class="col-auto">
-                <p class="text-light fw-bold mb-0">Back-end by <a class="fw-normal link-light text-decoration-none link-opacity-75 link-opacity-100-hover" href="https://github.com/JohnFRivera" target="_blank">Kevinn Andrés Álzate Pino &copy;</a></p>
+                <p class="fw-bold mb-0">Back-end by <a class="fw-semibold link-dark text-decoration-none link-opacity-75 link-opacity-100-hover" href="https://github.com/JohnFRivera" target="_blank">Kevinn Andrés Álzate Pino &copy;</a></p>
             </div>
         </div>
     </div>
     `;
 };
-const SetError = (message) => {
-    let lblErr = document.getElementById('lblErr');
+const SetError = (id, message) => {
+    let lblErr = document.getElementById(id);
     if (message.length > 0) {
         lblErr.className = 'text-danger pb-3 mb-0';
         lblErr.innerHTML = `

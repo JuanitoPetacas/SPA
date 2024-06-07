@@ -1,27 +1,32 @@
-const DefaultOptions = {
-    language: {
-        "decimal": "",
-        "emptyTable": "No hay datos disponibles en la tabla",
-        "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-        "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
-        "infoFiltered": "(filtrado de _MAX_ entradas totales)",
-        "infoPostFix": "",
-        "thousands": ",",
-        "lengthMenu": "Mostrar _MENU_ entradas",
-        "loadingRecords": "Cargando...",
-        "processing": "",
-        "search": "Buscar:",
-        "zeroRecords": "No se encontraron registros coincidentes",
-        "paginate": {
-            "first": "Primero",
-            "last": "Ultimo",
-            "next": "&raquo;",
-            "previous": "&laquo;"
+const DefaultOptions = (name, target) => {
+    return {
+        language: {
+            "decimal": "",
+            "emptyTable": "No hay datos disponibles en la tabla",
+            "info": `Mostrando _START_ a _END_ de _TOTAL_ ${name}`,
+            "infoEmpty": `Mostrando 0 a 0 de 0 ${name}`,
+            "infoFiltered": `(filtrado de _MAX_ ${name} totales)`,
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": `Mostrar _MENU_ ${name}`,
+            "loadingRecords": "Cargando...",
+            "processing": "",
+            "search": "Buscar:",
+            "zeroRecords": "No se encontraron registros coincidentes",
+            "paginate": {
+                "first": "«",
+                "last": "»",
+                "next": "›",
+                "previous": "‹"
+            },
+            "aria": {
+                "orderable": "Ordenar por esta columna",
+                "orderableReverse": "Ordenar esta columna en orden inverso"
+            }
         },
-        "aria": {
-            "orderable": "Ordenar por esta columna",
-            "orderableReverse": "Ordenar esta columna en orden inverso"
-        }
+        columnDefs: [
+            { target: target, orderable: false }
+        ]
     }
 };
 const SetColumns = (dataTable, arrayCols) => {

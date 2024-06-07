@@ -24,29 +24,25 @@ fetch(`${GetHost()}/Back/Controllers/spaEmpelados/roles/controlador_select_rol.p
     .catch(err => {
         SetCatchModal(err);
     })
-const GetData = async () => {
-    //Set controller
-    var response = await fetch(`${GetHost()}/Back/Controllers/spaEmpelados/usuarios/controlador_Select_usuario.php`);
-    if (response.ok) {
-        var data = await response.json();
-        //Fill table, valid buttons
-        FillTable(dataTable, data, 'ambos');
-        SetButtons();
-    } else {
-        SetModal(
-            `
-            <div class="text-danger">
-                <i class="bi bi-emoji-frown-fill"></i>
-                ERROR ${response.status}
-            </div>
-            `,
-            'Ha ocurrido un fallo con el servidor, te recomendamos <b>recargar la pagina</b>',
-            `<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>`
-        );
-        ShowModal();
-    };
-    let table = new DataTable('#dataTable', DefaultOptions);
-};
+fetch(`${GetHost()}/Back/Controllers/spaEmpelados/usuarios/controlador_Select_usuario.php`).then(response => response.json())
+.then(data => {
+    FillTable(dataTable, data, 'ambos');
+    SetButtons();
+}).catch(err => {
+    SetModal(
+        `
+        <div class="text-danger">
+            <i class="bi bi-emoji-frown-fill"></i>
+            ERROR <span class="fs-6">${err}</span>
+        </div>
+        `,
+        'Ha ocurrido un fallo con el servidor, te recomendamos <b>recargar la pagina</b>',
+        `<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>`
+    );
+    ShowModal();
+}).finally(()=>{
+    new DataTable('#dataTable', DefaultOptions('usuarios', Columns.length - 1));
+});
 const SetButtons = () => {
     var btnEdit = document.querySelectorAll('.btn-outline-info');
     btnEdit.forEach(item => {
@@ -160,7 +156,6 @@ const SetButtons = () => {
 };
 document.addEventListener('DOMContentLoaded', () => {
     SetColumns(dataTable, Columns);
-    GetData();
 });
 btnNuevo.addEventListener('click', () => {
     SetModal(

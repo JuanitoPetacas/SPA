@@ -7,95 +7,39 @@
     <link rel="stylesheet" href="../../Utils/datatables.min.css">
 </head>
 
-<body class="container-fluid">
-    <header class="row"></header>
-    <div class="row">
-        <nav class="navbar navbar-expand-lg bg-dark shadow"></nav>
-    </div>
-    <main class="row">
-        <aside class="col-auto border border-secondary px-0">
-            <ul class="nav nav-pills flex-column" id="asideBar"></ul>
+<body class="container-fluid bg-body-secondary">
+    <main class="row mb-5 mb-md-0">
+        <aside class="col col-md-auto g-0 p-2">
+            <div class="bg-light rounded-3 p-2 shadow overflow-x-auto">
+                <ul class="nav flex-nowrap flex-md-column gap-2" id="asideBar"></ul>
+            </div>
         </aside>
-        <div class="col">
-            <div class="row p-5 pb-4">
-                <h1>Reportes de Empresa</h1>
-            </div>
-            <div class="row p-5 pt-3">
+        <section class="col px-3 px-md-5">
+            <h4 class="mt-3 mb-0 fw-normal">Bienvenido a</h4>
+            <h2 class="fw-bold mb-4">Reportes de Empresa</h2>
+            <ul class="nav nav-underline fs-5 gap-4 mb-3">
+                <li class="nav-item">
+                    <button class="nav-link link-secondary" type="button" id="btnIngresosGenerados">Ingresos Generados</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link link-secondary" type="button" id="btnOcupacionTerapeutas">Ocupación Terapeutas</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link link-secondary" type="button" id="btnClientesFrecuentes">Clientes Frecuentes</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link link-secondary" type="button" id="btnConsumoProductos">Consumo Productos</button>
+                </li>
+            </ul>
+            <div class="row">
                 <div class="col">
-                    <h3>Ingresos Generados por Tiempo</h3>
-                    <div id="lblIngresosTiempo"></div>
-                    <div class="table-responsive">
-                        <table id="dtIngresosTiempo" class="table table-hover w-100">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Dia</th>
-                                    <th>Mes</th>
-                                    <th>Año</th>
-                                    <th>Ingreso</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
+                    <div id="lblError"></div>
+                    <div class="table-responsive mb-5" id="table"></div>
                 </div>
             </div>
-            <div class="row p-5 pt-3">
-                <div class="col">
-                    <h3>Ocupación de Terapeutas</h3>
-                    <div id="lblOcupacionTerapeutas"></div>
-                    <div class="table-responsive">
-                        <table id="dtOcupacionTerapeutas" class="table table-hover w-100">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Terapeuta</th>
-                                    <th>Ocupación</th>
-                                    <th>Horarios</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="row p-5 pt-3">
-                <div class="col">
-                    <h3>Clientes Frecuentes</h3>
-                    <div id="lblClientesFrecuentes"></div>
-                    <div class="table-responsive">
-                        <table id="dtClientesFrecuentes" class="table table-hover w-100">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Cliente</th>
-                                    <th>Tratamiento</th>
-                                    <th>Visitas</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="row p-5 pt-3">
-                <div class="col">
-                    <h3>Inventario y Consumo de Productos</h3>
-                    <div id="lblInventarioConsumo"></div>
-                    <div class="table-responsive">
-                        <table id="dtInventarioConsumo" class="table table-hover w-100">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Stock</th>
-                                    <th>Consumidos</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </section>
     </main>
-    <footer class="row"></footer>
+    <footer class="row fixed-bottom"></footer>
     <script src="../../../Assets/Js/bootstrap.bundle.min.js"></script>
     <script src="../../Utils/vfs_fonts.js"></script>
     <script src="../../Utils/pdfmake.min.js"></script>
