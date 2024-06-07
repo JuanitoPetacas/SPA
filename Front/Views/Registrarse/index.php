@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Assets/Css/styles.css">
 </head>
 <body class="container-fluid">
     <header class="row"></header>
@@ -20,10 +21,10 @@
                     <div class="col-12 col-md-6">
                         <form>
                             <h3 class="mb-1">Datos básicos</h3>
-                            <label class="text-secondary fs-5 ms-1 mb-1" for="nombres">Nombre completo*</label>
+                            <label class="text-secondary fs-5 ms-1 mb-1" for="nombres">Nombres*</label>
                             <input type="text" class="form-control form-control-lg rounded-3 mb-1" name="nombres" id="nombres" required>
-                            <label class="text-secondary fs-5 ms-1 mb-1" for="direccion">Dirección</label>
-                            <input type="text" class="form-control form-control-lg rounded-3 mb-1" name="direccion" id="direccion" required>
+                            <label class="text-secondary fs-5 ms-1 mb-1" for="nombres">Apellidos*</label>
+                            <input type="text" class="form-control form-control-lg rounded-3 mb-1" name="apellidos" id="apellidos" required>
                             <label class="text-secondary fs-5 ms-1 mb-1" for="telefono">Teléfono*</label>
                             <input type="tel" class="form-control form-control-lg rounded-3 mb-3" name="telefono" id="telefono" pattern="^[0-9]*$" required>
                             <h3 class="mb-1">Datos de ingreso</h3>
@@ -48,8 +49,9 @@
         <div class="container-fluid Social-Media"></div>
     </main>
     <footer class="row"></footer>
+    <script type="module" src="main.js"></script>
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"></div>
     <script src="../Assets/Js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
 </html>

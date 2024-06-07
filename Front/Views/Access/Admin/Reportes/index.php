@@ -23,8 +23,9 @@
             <div class="row p-5 pt-3">
                 <div class="col">
                     <h3>Ingresos Generados por Tiempo</h3>
+                    <div id="lblIngresosTiempo"></div>
                     <div class="table-responsive">
-                        <table id="dataTable" class="table table-hover w-100">
+                        <table id="dtIngresosTiempo" class="table table-hover w-100">
                             <thead class="table-dark">
                                 <tr>
                                     <th>Dia</th>
@@ -41,8 +42,9 @@
             <div class="row p-5 pt-3">
                 <div class="col">
                     <h3>Ocupación de Terapeutas</h3>
+                    <div id="lblOcupacionTerapeutas"></div>
                     <div class="table-responsive">
-                        <table id="dataTable" class="table table-hover w-100">
+                        <table id="dtOcupacionTerapeutas" class="table table-hover w-100">
                             <thead class="table-dark">
                                 <tr>
                                     <th>Terapeuta</th>
@@ -58,8 +60,9 @@
             <div class="row p-5 pt-3">
                 <div class="col">
                     <h3>Clientes Frecuentes</h3>
+                    <div id="lblClientesFrecuentes"></div>
                     <div class="table-responsive">
-                        <table id="dataTable" class="table table-hover w-100">
+                        <table id="dtClientesFrecuentes" class="table table-hover w-100">
                             <thead class="table-dark">
                                 <tr>
                                     <th>Cliente</th>
@@ -75,8 +78,9 @@
             <div class="row p-5 pt-3">
                 <div class="col">
                     <h3>Inventario y Consumo de Productos</h3>
+                    <div id="lblInventarioConsumo"></div>
                     <div class="table-responsive">
-                        <table id="dataTable" class="table table-hover w-100">
+                        <table id="dtInventarioConsumo" class="table table-hover w-100">
                             <thead class="table-dark">
                                 <tr>
                                     <th>Producto</th>
@@ -93,6 +97,8 @@
     </main>
     <footer class="row"></footer>
     <script src="../../../Assets/Js/bootstrap.bundle.min.js"></script>
+    <script src="../../Utils/vfs_fonts.js"></script>
+    <script src="../../Utils/pdfmake.min.js"></script>
     <script src="../../Utils/datatables.min.js"></script>
     <script type="module" src="main.js"></script>
 </body>
