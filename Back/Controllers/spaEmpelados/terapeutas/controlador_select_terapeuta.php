@@ -1,12 +1,7 @@
-<?php 
-
-include('../../Model/conexion.php');
+<?php
+include('../../../Model/conexion.php');
 
 $conexion = new Conexion();
-
-$nombre = $_POST['nombre'];
-$apellido = $_POST['apellido'];
-$especialidad = $_POST['especialidad'];
 
 try {
     $consulta = 'SELECT * FROM terapeutas';

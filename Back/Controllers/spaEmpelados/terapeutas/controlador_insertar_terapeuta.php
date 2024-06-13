@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include('../../../Model/conexion.php');
 
@@ -13,10 +13,10 @@ $conexion->conectar();
 try {
     $consulta = 'INSERT INTO terapeutas (nombre, apellido, especialidad ) VALUES (:nombre, :apellido, :especialidad)';
     $stmt = $conexion->prepare($consulta);
-    $stmt->bindParam(':nombre',$nombre, PDO::PARAM_STR);
-    $stmt->bindParam(':apellido',$apellido, PDO::PARAM_STR);
-    $stmt->bindParam(':especialidad',$especialidad, PDO::PARAM_STR);
-    
+    $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+    $stmt->bindParam(':apellido', $apellido, PDO::PARAM_STR);
+    $stmt->bindParam(':especialidad', $especialidad, PDO::PARAM_STR);
+    $resultado = $stmt->execute();
     if ($resultado) {
         echo "Consulta ejecutada correctamente";
     } else {

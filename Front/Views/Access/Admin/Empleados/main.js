@@ -1,5 +1,5 @@
-import { GetHost, SetTitle, SetError, SetCatchModal, SetSucessModal, SetLoading, ValidForm } from '../../../Assets/Js/globals.functions.js';
-import {} from '../Assets/Helper/Admin.Layout.js';
+import { GetHost, SetTitle, SetCatchModal, SetSucessModal, SetLoading, ValidForm } from '../../../Assets/Js/globals.functions.js';
+import { } from '../Assets/Helper/Admin.Layout.js';
 import { SetAsideActive } from '../../Utils/asidebar.js';
 import { DefaultOptions, SetColumns, FillTable } from '../Assets/Js/table.js';
 import { SetModal, ShowModal } from '../../../Assets/Js/modal.js';
@@ -15,29 +15,29 @@ const Columns = [
 ];
 const btnNuevo = document.getElementById('btnNuevo');
 const dataTable = document.getElementById('dataTable');
-fetch(`${GetHost()}/Back/Controllers/spaEmpelados/empleados/controlador_select_empleados.php`).then(response => response.json())
-.then(data => {
-    FillTable(dataTable, data, 'ambos');
-    SetButtons();
-}).catch(err => {
-    SetModal(
-        `
+fetch(`${GetHost()}/Back/Controllers/spaEmpelados/terapeutas/controlador_select_terapeuta.php`).then(response => response.json())
+    .then(data => {
+        FillTable(dataTable, data, 'edit');
+        SetButtons();
+    }).catch(err => {
+        SetModal(
+            `
         <div class="text-danger">
             <i class="bi bi-emoji-frown-fill"></i>
             ERROR <span class="fs-6">${err}</span>
         </div>
         `,
-        'Ha ocurrido un fallo con el servidor, te recomendamos <b>recargar la pagina</b>',
-        `<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>`
-    );
-    ShowModal();
-}).finally(()=>{
-    new DataTable('#dataTable', DefaultOptions('empleados', Columns.length - 1));
-});
+            'Ha ocurrido un fallo con el servidor, te recomendamos <b>recargar la pagina</b>',
+            `<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>`
+        );
+        ShowModal();
+    }).finally(() => {
+        new DataTable('#dataTable', DefaultOptions('empleados', Columns.length - 1));
+    });
 const SetButtons = () => {
     var btnEdit = document.querySelectorAll('.btn-outline-info');
     btnEdit.forEach(item => {
-        item.addEventListener('click', ()=>{
+        item.addEventListener('click', () => {
             var dataNode = item.parentElement.parentElement.parentElement.parentElement.childNodes;
             SetModal(
                 `
@@ -75,7 +75,7 @@ const SetButtons = () => {
             );
             ShowModal();
             var btnEditar = document.getElementById('btnEditar');
-            btnEditar.addEventListener('click', ()=>{
+            btnEditar.addEventListener('click', () => {
                 if (ValidForm('frmEditar')) {
                     SetLoading(btnEditar);
                     var formData = new FormData(document.getElementById('frmEditar'));
@@ -86,7 +86,7 @@ const SetButtons = () => {
                     });
                     //Set controller and send data for body
                     $.ajax({
-                        url: `${GetHost()}/Back/Controllers/spaEmpelados/empleados/controlador_edit_empleado.php`,
+                        url: `${GetHost()}/Back/Controllers/spaEmpelados/terapeutas/controlador_edit_terapeuta.php`,
                         type: 'POST',
                         data: object,
                         success: function (data) {
@@ -101,11 +101,10 @@ const SetButtons = () => {
         });
     });
 };
-document.addEventListener('DOMContentLoaded', ()=>{
+document.addEventListener('DOMContentLoaded', () => {
     SetColumns(dataTable, Columns);
-    GetData();
 });
-btnNuevo.addEventListener('click', ()=>{
+btnNuevo.addEventListener('click', () => {
     SetModal(
         `
         <div class="text-primary">
@@ -142,7 +141,7 @@ btnNuevo.addEventListener('click', ()=>{
     );
     ShowModal();
     var btnGuardar = document.getElementById('btnGuardar');
-    btnGuardar.addEventListener('click', ()=>{
+    btnGuardar.addEventListener('click', () => {
         if (ValidForm('frmNuevo')) {
             SetLoading(btnGuardar);
             var formData = new FormData(document.getElementById('frmNuevo'));
@@ -152,7 +151,7 @@ btnNuevo.addEventListener('click', ()=>{
             });
             //Set controller and send data for body
             $.ajax({
-                url: `${GetHost()}/Back/Controllers/spaEmpelados/empleados/controlador_insertar_empleado.php`,
+                url: `${GetHost()}/Back/Controllers/spaEmpelados/terapeutas/controlador_insertar_terapeuta.php`,
                 type: 'POST',
                 data: object,
                 success: function (data) {

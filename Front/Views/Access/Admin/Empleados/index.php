@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../Utils/datatables.min.css">
 </head>
+
 <body class="container-fluid bg-body-secondary">
     <main class="row mb-5 mb-md-0">
         <aside class="col col-md-auto g-0 p-2">
@@ -39,7 +41,9 @@
     <footer class="row fixed-bottom"></footer>
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"></div>
     <script src="../../../Assets/Js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="../../Utils/datatables.min.js"></script>
     <script type="module" src="main.js"></script>
 </body>
+
 </html>

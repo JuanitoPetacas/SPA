@@ -36,5 +36,6 @@ btnReservar.addEventListener('click', () => {
                 SetCatchModal(err);
             }
         });
+        btnReservar.innerHTML = 'Reservar';
     };
 });
