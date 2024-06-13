@@ -73,20 +73,25 @@ const setDataTable = (URL, btnContent, innerHTML, idTable) => {
     let table = document.getElementById('table');
     table.innerHTML = innerHTML;
     let dataTable = document.getElementById(idTable);
-    fetch(URL).then(response => response.json())
-    .then(data => {
-        FillTable(dataTable, data, '')
-    }).catch(err => {
-        console.error(err);
-        document.getElementById('lblError').innerHTML = `
-        <div class="alert bg-danger text-light shadow alert-dismissible fade show" role="alert">
-            <i class="bi bi-exclamation-circle-fill me-2"></i>
-            <strong>Ha ocurrido un error al recibir los datos</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        `;
-    }).finally(()=>{
-        new DataTable(`#${idTable}`, Options);
+    $.ajax({
+        url: URL,
+        type: 'GET',
+        success: function (data) {
+            document.getElementById('lblError').innerHTML = '';
+            FillTable(dataTable, JSON.parse(data), '')
+        },
+        error: function (err) {
+            document.getElementById('lblError').innerHTML = `
+            <div class="alert bg-danger text-light shadow alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-circle-fill me-2"></i>
+                <strong>Ha ocurrido un error al recibir los datos ${err}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
+        },
+        complete: function () {
+            new DataTable(`#${idTable}`, Options);
+        }
     });
 };
 //*
@@ -106,7 +111,7 @@ setDataTable(`${GetHost()}`, 'Ingresos Generados', `
 </table>
 `, 'dtIngresosTiempo');
 navLinks.forEach(item => {
-    item.addEventListener('click', ()=>{
+    item.addEventListener('click', () => {
         switch (item.textContent.trim()) {
             case 'Ingresos Generados':
                 setDataTable(`${GetHost()}`, 'Ingresos Generados', `
@@ -124,13 +129,17 @@ navLinks.forEach(item => {
                 `, 'dtIngresosTiempo');
                 break;
             case 'Ocupación Terapeutas':
-                setDataTable(`${GetHost()}`, 'Ocupación Terapeutas', `
+                setDataTable(`${GetHost()}/Back/Controllers/reportes/controlador_reportes_terapeutas.php`, 'Ocupación Terapeutas', `
                 <table class="table table-light table-hover fs-5 w-100 mb-0" id="dtOcupacionTerapeutas">
                     <thead>
                         <tr>
+                            <th>Id</th>
                             <th>Terapeuta</th>
-                            <th>Ocupación</th>
-                            <th>Horarios</th>
+                            <th>Fecha</th>
+                            <th>Inicio Laboral</th>
+                            <th>Fin Laboral</th>
+                            <th>Horarios Ocupados</th>
+                            <th>Horarios Disponibles</th>
                         </tr>
                     </thead>
                     <tbody></tbody>

@@ -43,7 +43,7 @@ function JsonToMatriz(json) {
     json.forEach(item => {
         let Cols = new Array();
         for (var key in item) {
-            Cols.push(item[key].toString());
+            Cols.push(item[key]);
         };
         Row.push(Cols);
     });
