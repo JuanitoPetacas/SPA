@@ -14,29 +14,30 @@ const Columns = [
 const btnNuevo = document.getElementById('btnNuevo');
 const dataTable = document.getElementById('dataTable');
 fetch(`${GetHost()}/Back/Controllers/spaEmpelados/roles/controlador_select_rol.php`).then(response => response.json())
-.then(data => {
-    FillTable(dataTable, data, 'ambos');
-    SetButtons();
-}).catch(err => {
-    SetModal(
-        `
+    .then(data => {
+        FillTable(dataTable, data, 'edit');
+        SetButtons();
+    }).catch(err => {
+        SetModal(
+            `
         <div class="text-danger">
             <i class="bi bi-emoji-frown-fill"></i>
             ERROR <span class="fs-6">${err}</span>
         </div>
         `,
-        'Ha ocurrido un fallo con el servidor, te recomendamos <b>recargar la pagina</b>',
-        `<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>`
-    );
-    ShowModal();
-}).finally(()=>{
-    new DataTable('#dataTable', DefaultOptions('roles', Columns.length - 1));
-});
+            'Ha ocurrido un fallo con el servidor, te recomendamos <b>recargar la pagina</b>',
+            `<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>`
+        );
+        ShowModal();
+    }).finally(() => {
+        new DataTable('#dataTable', DefaultOptions('roles', Columns.length - 1));
+    });
 const SetButtons = () => {
     var btnEdit = document.querySelectorAll('.btn-outline-info');
     btnEdit.forEach(item => {
         item.addEventListener('click', () => {
-            var dataNode = item.parentElement.parentElement.parentElement.childNodes;
+            var dataNode = item.parentElement.parentElement.parentElement.parentElement.childNodes;
+            console.log(dataNode);
             SetModal(
                 `
                 <div class="text-info">

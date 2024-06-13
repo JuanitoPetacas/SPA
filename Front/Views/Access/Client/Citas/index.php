@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body class="container-fluid bg-body-secondary">
-    <main class="row mb-5 mb-md-0">
-        <div class="container-fluid">
-            <header class="row"></header>
-            <div class="row p-2 pb-0">
-                <nav class="navbar navbar-expand-lg bg-body-tertiary rounded-3 shadow-sm"></nav>
-            </div>
+    <div class="container-fluid">
+        <header class="row"></header>
+        <div class="row p-2 pb-0">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary rounded-3 shadow-sm"></nav>
         </div>
+    </div>
+    <main class="row mb-5 mb-md-0">
         <aside class="col col-md-auto g-0 p-2">
             <div class="bg-light rounded-3 p-2 shadow overflow-x-auto">
                 <ul class="nav flex-nowrap flex-md-column gap-2" id="asideBar"></ul>
@@ -61,6 +63,8 @@
     <footer class="row"></footer>
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"></div>
     <script src="../../../Assets/Js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="module" src="main.js"></script>
 </body>
+
 </html>

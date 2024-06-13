@@ -1,7 +1,7 @@
 import { SetModal, ShowModal } from './modal.js';
 //settings
 const GetHost = () => {
-    return window.location.origin;
+    return window.location.origin + '/spa';
 };
 const SetTitle = (title) => {
     document.title = 'Spa | ' + title;
