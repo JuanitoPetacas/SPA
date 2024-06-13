@@ -6,7 +6,10 @@ $conexion = new conexion();
 $conexion->conectar();
 
 try {
-
+/*5)	Reporte de ocupación de terapeutas: 
+• Muestra la ocupación de cada terapeuta durante un período de tiempo, 
+destacando los horarios ocupados y disponibles. 
+*/
     // obtenemos datos del post 
     $fecha = $_POST['fecha'];
     $horaInicio = $_POST['hora_Inicio'];
