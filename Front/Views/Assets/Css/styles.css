@@ -18,12 +18,14 @@ main {
     background-image: url('../img/img_spa_login.webp');
     background-size: cover;
     background-position: center;
+    box-shadow: inset 0px 0px 50px 60px #E9ECEF;
 }
 .bg-img-register {
     min-height: 88vh;
     background-image: url('../img/img_spa_register.jpg');
     background-size: cover;
     background-position: center;
+    box-shadow: inset 0px 0px 50px 60px #E9ECEF;
 }
 .logo-icon {
     filter: drop-shadow(6px 4px 30px rgba(255, 255, 255, 0.283));
