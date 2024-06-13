@@ -19,6 +19,7 @@ btnReservar.addEventListener('click', ()=>{
         }).then(response => response.json())
         .then(data => {
             //Manipulate data
+            
         })
         .catch(err => {
             SetCatchModal(err);

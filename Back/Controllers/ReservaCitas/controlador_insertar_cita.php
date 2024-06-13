@@ -19,7 +19,7 @@ $id_Servicio = $_POST['id_Servicio'];
     $stmtVerificacion = $conexion->prepare($consultaVerificacion);
     $stmtVerificacion->bindParam(':fecha', $fecha);
     $stmtVerificacion->bindParam(':horaInicio', $horaInicio);
-    $stmtVerificacion->bindParam(':horaFin', $horaFin);
+    $stmtVerificacion->bindParam(':horaFin', $hora_fin);
     $stmtVerificacion->execute();
     $count = $stmtVerificacion->fetchColumn();
 
@@ -32,7 +32,7 @@ $id_Servicio = $_POST['id_Servicio'];
         $stmtInsertar = $conexion->prepare($consultaInsertar);
         $stmtInsertar->bindParam(':fecha', $fecha);
         $stmtInsertar->bindParam(':horaInicio', $horaInicio);
-        $stmtInsertar->bindParam(':horaFin', $horaFin);
+        $stmtInsertar->bindParam(':horaFin', $hora_fin);
         $stmtInsertar->bindParam(':id_cliente', $id_cliente);
         $stmtInsertar->bindParam(':id_Servicio', $id_Servicio);
         $stmtInsertar->execute();
