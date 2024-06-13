@@ -147,13 +147,14 @@ navLinks.forEach(item => {
                 `, 'dtOcupacionTerapeutas');
                 break;
             case 'Clientes Frecuentes':
-                setDataTable(`${GetHost()}`, 'Clientes Frecuentes', `
+                setDataTable(`${GetHost()}/Back/Controllers/reportes/controlador_reportes_clienteFRC.php`, 'Clientes Frecuentes', `
                 <table class="table table-light table-hover fs-5 w-100 mb-0" id="dtClientesFrecuentes">
                     <thead>
                         <tr>
+                            <th>Id</th>
                             <th>Cliente</th>
-                            <th>Tratamiento</th>
-                            <th>Visitas</th>
+                            <th>Cantidad de visitas</th>
+                            <th>Tratamientos mas solicitados</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
