@@ -16,25 +16,44 @@ const Columns = [
 ];
 const btnNuevo = document.getElementById('btnNuevo');
 const dataTable = document.getElementById('dataTable');
-fetch(`${GetHost()}/Back/Controllers/spaEmpelados/productos/controlador_select_empleados.php`).then(response => response.json())
+// ! Listar Producto
+$.ajax({
+    url: `../../../../../Back/Controllers/productos/seleccionar_Productos.php`,
+    type: 'GET',
+    dataType: "json",
+    success: function (data) {
+        FillTable(dataTable, data, 'ambos');
+        new DataTable('#dataTable', DefaultOptions('productos', Columns.length - 1));
+        SetSucessModal(data);
+        SetButtons();
+    },
+    error: function (err) {
+        console.log(err)
+        SetModal(
+            `
+            <div class="text-danger">
+                <i class="bi bi-emoji-frown-fill"></i>
+                ERROR <span class="fs-6">${err}</span>
+            </div>
+            `,
+            'Ha ocurrido un fallo con el servidor, te recomendamos <b>recargar la pagina</b>',
+            `<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>`
+        );
+        ShowModal();
+    }
+});
+/* fetch(`../../../../../Back/Controllers/productos/seleccionar_Productos.php`).then(response => response.json())
 .then(data => {
     FillTable(dataTable, data, 'ambos');
     SetButtons();
 }).catch(err => {
-    SetModal(
-        `
-        <div class="text-danger">
-            <i class="bi bi-emoji-frown-fill"></i>
-            ERROR <span class="fs-6">${err}</span>
-        </div>
-        `,
-        'Ha ocurrido un fallo con el servidor, te recomendamos <b>recargar la pagina</b>',
-        `<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>`
-    );
-    ShowModal();
+    console.log(err)
+
 }).finally(()=>{
     new DataTable('#dataTable', DefaultOptions('productos', Columns.length - 1));
-});
+}); */
+
+// ! Editar 
 const SetButtons = () => {
     var btnEdit = document.querySelectorAll('.btn-outline-info');
     btnEdit.forEach(item => {
@@ -62,7 +81,7 @@ const SetButtons = () => {
                                 </div>
                                 <div class="col mb-2">
                                     <label class="ms-1 mb-1 text-black-50" for="valorProducto">Valor</label>
-                                    <input class="form-control" type="text" name="valor_Producto" id="valorProducto" value="${dataNode[3].innerText}" required>
+                                    <input class="form-control" type="text" name="valor" id="valorProducto" value="${dataNode[3].innerText}" required>
                                 </div>
                             </div>
                         </div>
@@ -95,13 +114,22 @@ const SetButtons = () => {
                     });
                     //Set controller and send data for body
                     $.ajax({
-                        url: `${GetHost()}/Back/Controllers/spaEmpelados/productos/controlador_edit_producto.php`,
+                        url: `../../../../../Back/Controllers/productos/editar_Producto.php`,
                         type: 'POST',
                         data: object,
                         success: function (data) {
-                            SetSucessModal(data);
+                            var mensaje = JSON.parse(data);
+                            if (mensaje.message == "Producto editado")
+                                {
+                                    SetSucessModal(mensaje.message);
+                                }
+                            else{
+                                SetCatchModal(data);
+                            }
+                           
                         },
                         error: function (err) {
+                            console.log(err);
                             SetCatchModal(err);
                         }
                     });
@@ -109,6 +137,7 @@ const SetButtons = () => {
             });
         });
     });
+    // ! Eliminar 
     var btnDelete = document.querySelectorAll('.btn-danger');
     btnDelete.forEach(item => {
         item.addEventListener('click', ()=>{
@@ -134,14 +163,24 @@ const SetButtons = () => {
                 SetLoading(btnEliminar);
                 //Set controller and send data for body
                 $.ajax({
-                    url: `${GetHost()}/Back/Controllers/spaEmpelados/productos/controlador_eliminar_producto.php`,
+                    url: `../../../../../Back/Controllers/productos/eliminar_Producto.php`,
                     type: 'POST',
                     data: { id: parseInt(dataNode[0].innerText) },
                     success: function (data) {
-                        SetSucessModal(data);
+                        var mensaje = JSON.parse(data);
+                        
+                        if (mensaje.message == "Producto Eliminado")
+                            {
+                                SetSucessModal(mensaje.message);
+                            }
+                        else{
+                            
+                            SetCatchModal(err);
+                        }
                     },
                     error: function (err) {
-                        SetCatchModal(err);
+                        console.log(err)
+                        // SetCatchModal(err);
                     }
                 });
             });
@@ -175,17 +214,9 @@ btnNuevo.addEventListener('click', ()=>{
                         </div>
                         <div class="col mb-2">
                             <label class="ms-1 mb-1 text-black-50" for="valorProducto">Valor</label>
-                            <input class="form-control" type="text" name="valor_Producto" id="valorProducto" required>
+                            <input class="form-control" type="text" name="valor" id="valorProducto" required>
                         </div>
                     </div>
-                </div>
-                <div class="col mb-2">
-                    <label class="ms-1 mb-1 text-black-50" for="estado">Estado</label>
-                    <select class="form-select" name="estado" id="estado" required>
-                        <option value="">Seleccionar...</option>
-                        <option value="1">Activo</option>
-                        <option value="0">Inactivo</option>
-                    </select>
                 </div>
             </div>
         </form>
@@ -207,14 +238,23 @@ btnNuevo.addEventListener('click', ()=>{
             });
             //Set controller and send data for body
             $.ajax({
-                url: `${GetHost()}/Back/Controllers/spaEmpelados/productos/controlador_insertar_producto.php`,
+                url: `../../../../../Back/Controllers/productos/insertar_Producto.php`,
                 type: 'POST',
                 data: object,
                 success: function (data) {
-                    SetSucessModal(data);
+                    var mensaje = JSON.parse(data);
+
+                    if (mensaje.message == "Producto Agregado")
+                        {
+                            SetSucessModal(mensaje.message);
+                        }
+                    else {
+                        SetCatchModal(data);
+                    }
+                    
                 },
                 error: function (err) {
-                    SetCatchModal(err);
+                    console.log(err)
                 }
             });
         };
