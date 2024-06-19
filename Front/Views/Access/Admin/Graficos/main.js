@@ -3,8 +3,17 @@ import { } from '../Assets/Helper/Admin.Layout.js';
 import { SetAsideActive } from '../../Utils/asidebar.js';
 SetTitle('Gráficos');
 SetAsideActive('Gráficos');
-fetch('').then(response => response.json())
+// ! Primer Grafico 
+fetch(`${GetHost()}/Back/Controllers/graficos/grafico_IngresosPorTiempo.php`)
+.then(response => response.json())
 .then(data => {
+  let mes = []
+  let total_Ingresos = []
+
+  data.forEach(element =>{
+    mes.push(element.mes)
+    total_Ingresos.push(element.total)
+  })
   document.getElementById('ingresosPorTiempo').innerHTML = `
   <canvas id="cvsIngresosTiempo"></canvas>
   `;
@@ -12,10 +21,10 @@ fetch('').then(response => response.json())
   new Chart(cvsIngresosTiempo, {
     type: 'bar',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: mes,
       datasets: [{
         label: 'Ingresos',
-        data: [12, 19, 3, 5, 2, 3],
+        data: total_Ingresos,
         borderWidth: 1,
         backgroundColor: 'green'
       }]
@@ -31,8 +40,17 @@ fetch('').then(response => response.json())
 }).catch(err => {
   console.error(err);
 });
-fetch('').then(response => response.json())
+// ! Segundo Grafico
+fetch(`${GetHost()}/Back/Controllers/graficos/grafico_Popularidad.php`)
+.then(response => response.json())
 .then(data => {
+  console.log(data)
+  let nombres = [];
+  let cantidad = [];
+  data.forEach(element => {
+      nombres.push(element.descripcion)
+      cantidad.push(element.cantidad)
+  });
   document.getElementById('popularidadTratamientos').innerHTML = `
   <canvas id="cvsPopularidadTratamientos"></canvas>
   `;
@@ -40,10 +58,10 @@ fetch('').then(response => response.json())
   new Chart(cvsPopularidadTratamientos, {
     type: 'bar',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: nombres,
       datasets: [{
         label: 'Popularidad',
-        data: [12, 19, 3, 5, 2, 3],
+        data: cantidad,
         borderWidth: 1,
         backgroundColor: 'yellow'
       }]
@@ -59,8 +77,15 @@ fetch('').then(response => response.json())
 }).catch(err => {
   console.error(err);
 });
-fetch('').then(response => response.json())
+// ! Tercer Grafico
+fetch(`${GetHost()}/Back/Controllers/graficos/grafico_IngresosServicios.php`).then(response => response.json())
 .then(data => {
+  let nombres = [];
+  let valor = [];
+  data.forEach( element => {
+    nombres.push(element.descripcion);
+    valor.push(element.valor)
+  })
   document.getElementById('ingresosPorServicio').innerHTML = `
   <canvas id="cvsIngresosServicio"></canvas>
   `;
@@ -68,9 +93,9 @@ fetch('').then(response => response.json())
   new Chart(cvsIngresosServicio, {
     type: 'pie',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: nombres,
       datasets: [{
-        data: [12, 19, 3, 5, 2, 3],
+        data: valor,
         borderWidth: 1,
       }]
     },
