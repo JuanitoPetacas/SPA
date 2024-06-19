@@ -15,7 +15,8 @@ const Columns = [
     ''
 ];
 let arrayTerapeutas = [];
-fetch(`${GetHost()}/Back/Controllers/spaEmpelados/terapeutas/controlador_select_terapeutas.php`).then(response => response.json())
+fetch(`${GetHost()}/Back/Controllers/spaEmpelados/terapeutas/controlador_select_terapeuta.php`)
+.then(response => response.json())
     .then(data => {
         arrayTerapeutas = data;
     })
@@ -24,7 +25,8 @@ fetch(`${GetHost()}/Back/Controllers/spaEmpelados/terapeutas/controlador_select_
     })
 const btnNuevo = document.getElementById('btnNuevo');
 const dataTable = document.getElementById('dataTable');
-fetch(`${GetHost()}/Back/Controllers/spaEmpelados/servicios/controlador_Select_servicios.php`).then(response => response.json())
+// ! Listar  
+fetch(`${GetHost()}/Back/Controllers/servicios/select_servicios.php`).then(response => response.json())
 .then(data => {
     FillTable(dataTable, data, 'ambos');
     SetButtons();
@@ -43,6 +45,7 @@ fetch(`${GetHost()}/Back/Controllers/spaEmpelados/servicios/controlador_Select_s
 }).finally(()=>{
     new DataTable('#dataTable', DefaultOptions('servicios', Columns.length - 1));
 });
+// ! Editar
 const SetButtons = () => {
     var btnEdit = document.querySelectorAll('.btn-outline-info');
     btnEdit.forEach(item => {
@@ -76,7 +79,7 @@ const SetButtons = () => {
                         </div>
                         <div class="col">
                             <label class="ms-1 mb-1 text-black-50" for="idTerapeuta">Terapeuta</label>
-                            <select class="form-select" name="id_Terapeuta" id="idTerapeuta"></select>
+                            <select class="form-select" name="id_Terapeuta" id="id"></select>
                         </div>
                     </div>
                 </form>
@@ -86,8 +89,8 @@ const SetButtons = () => {
                 <button type="button" class="btn btn-info" id="btnEditar">Guardar</button
                 `
             );
-            FillSelect('idTerapeuta', arrayTerapeutas);
-            SetSelectOpt('idTerapeuta', dataNode[4].innerText)
+            FillSelect('id', arrayTerapeutas);
+            SetSelectOpt('id', dataNode[4].innerText)
             ShowModal();
             var btnEditar = document.getElementById('btnEditar');
             btnEditar.addEventListener('click', ()=>{
@@ -101,11 +104,12 @@ const SetButtons = () => {
                     });
                     //Set controller and send data for body
                     $.ajax({
-                        url: `${GetHost()}/Back/Controllers/spaEmpelados/servicios/controlador_edit_servicio.php`,
+                        url: `${GetHost()}/Back/Controllers/servicios/edit_servicio.php`,
                         type: 'POST',
                         data: object,
                         success: function (data) {
-                            SetSucessModal(data);
+                            var mensaje = JSON.parse(data);
+                            SetSucessModal(mensaje.message);
                         },
                         error: function (err) {
                             SetCatchModal(err);
@@ -115,10 +119,60 @@ const SetButtons = () => {
             });
         });
     });
+    // ! Eliminar 
+    var btnDelete = document.querySelectorAll('.btn-danger');
+    btnDelete.forEach(item => {
+        item.addEventListener('click', ()=>{
+            var dataNode = item.parentElement.parentElement.parentElement.parentElement.childNodes;
+            SetModal(
+                `
+                <div class="text-info">
+                    <i class="bi bi-trash-fill"></i>
+                    Eliminar Producto
+                </div>
+                `,
+                `
+                ¿Seguro que quieres eliminar a "<b>${dataNode[1].innerText}</b>"?
+                `,
+                `
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger" id="btnEliminar">Eliminar</button
+                `
+            );
+            ShowModal();
+            var btnEliminar = document.getElementById('btnEliminar');
+            btnEliminar.addEventListener('click', ()=>{
+                SetLoading(btnEliminar);
+                //Set controller and send data for body
+                $.ajax({
+                    url: `${GetHost()}/Back/Controllers/servicios/delete_servicio.php`,
+                    type: 'POST',
+                    data: { id: parseInt(dataNode[0].innerText) },
+                    success: function (data) {
+                        var mensaje = JSON.parse(data);
+                        
+                        if (mensaje.message == "Servicio Eliminado")
+                            {
+                                SetSucessModal(mensaje.message);
+                            }
+                        else{
+                            
+                            SetCatchModal(err);
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    }
+                });
+            });
+        });
+    });
 };
 document.addEventListener('DOMContentLoaded', ()=>{
     SetColumns(dataTable, Columns);
 });
+
+// ! Agregar
 btnNuevo.addEventListener('click', ()=>{
     SetModal(
         `
@@ -148,7 +202,7 @@ btnNuevo.addEventListener('click', ()=>{
                 </div>
                 <div class="col">
                     <label class="ms-1 mb-1 text-black-50" for="idTerapeuta">Terapeuta</label>
-                    <select class="form-select" name="id_Terapeuta" id="idTerapeuta"></select>
+                    <select class="form-select" name="id_Terapeuta" id="id"></select>
                 </div>
             </div>
         </form>
@@ -158,6 +212,7 @@ btnNuevo.addEventListener('click', ()=>{
         <button type="button" class="btn btn-primary" id="btnGuardar">Guardar</button>
         `
     );
+    FillSelect('id', arrayTerapeutas);
     ShowModal();
     var btnGuardar = document.getElementById('btnGuardar');
     btnGuardar.addEventListener('click', ()=>{
@@ -170,13 +225,15 @@ btnNuevo.addEventListener('click', ()=>{
             });
             //Set controller and send data for body
             $.ajax({
-                url: `${GetHost()}/Back/Controllers/spaEmpelados/servicios/controlador_insertar_servicio.php`,
+                url: `${GetHost()}/Back/Controllers/servicios/insert_servicio.php`,
                 type: 'POST',
                 data: object,
                 success: function (data) {
-                    SetSucessModal(data);
+                    var mensaje = JSON.parse(data)
+                    SetSucessModal(mensaje.message);
                 },
                 error: function (err) {
+                    console.log(err)
                     SetCatchModal(err);
                 }
             });

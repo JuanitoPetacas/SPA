@@ -1,12 +1,22 @@
 <?php
-include('../../../Model/conexion.php');
+    include('../../../Model/conexion.php');
 
-$conexion = new Conexion();
+    $conexion = new Conexion();
 
-try {
-    $consulta = 'SELECT * FROM terapeutas';
-    $citas = $conexion->ConsultaCompleja($consulta);
-    echo json_encode($citas);
-} catch (PDOException $e) {
-    echo 'error: ' . $e->getMessage();
-}
+    $conexion -> conectar();
+    try {
+        $consulta = "SELECT * FROM terapeutas";
+        $citas = $conexion->ConsultaCompleja($consulta);
+        $data = array();
+        foreach ($citas as $row)
+        {
+            $data[] = $row;
+        }
+        print json_encode($data);
+    } catch (PDOException $e) {
+        echo 'error: ' . $e->getMessage();
+    }
+    finally{
+        $conexion -> Desconectar();
+    }
+?>

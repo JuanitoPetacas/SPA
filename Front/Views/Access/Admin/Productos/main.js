@@ -42,17 +42,6 @@ $.ajax({
         ShowModal();
     }
 });
-/* fetch(`../../../../../Back/Controllers/productos/seleccionar_Productos.php`).then(response => response.json())
-.then(data => {
-    FillTable(dataTable, data, 'ambos');
-    SetButtons();
-}).catch(err => {
-    console.log(err)
-
-}).finally(()=>{
-    new DataTable('#dataTable', DefaultOptions('productos', Columns.length - 1));
-}); */
-
 // ! Editar 
 const SetButtons = () => {
     var btnEdit = document.querySelectorAll('.btn-outline-info');
