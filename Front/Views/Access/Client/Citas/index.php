@@ -51,6 +51,14 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col mb-4">
+                                    <label class="fs-5 ms-1 mb-1 text-black-50" for="idProducto">Producto</label>
+                                    <select class="form-select" name="id_Producto" id="idProducto" required>
+                                        <option value="">Seleccionar...</option>
+                                    </select>
+                                </div>
+                            </div>
                             <p class="mb-0" id="lblErr"></p>
                             <button class="btn btn-primary w-100" type="button" id="btnReservar">
                                 Reservar
