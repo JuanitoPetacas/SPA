@@ -15,7 +15,7 @@ const SetAside = (jsonButtons) => {
         <div class="dropdown">
             <button class="btn btn-lg bg-body-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi bi-person-circle me-1"></i>
-                John Rivera
+                ${window.localStorage.getItem('userName')}
             </button>
             <ul class="dropdown-menu">
                 <li>

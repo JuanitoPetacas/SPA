@@ -12,7 +12,6 @@ const Columns = [
     'Apellidos',
     'Dirección',
     'Correo',
-    'Servicio',
     ''
 ];
 const btnNuevo = document.getElementById('btnNuevo');
@@ -78,10 +77,6 @@ const SetButtons = () => {
                         <div class="col mb-2">
                             <label class="ms-1 mb-1 text-black-50" for="correo">Correo</label>
                             <input class="form-control" type="email" name="correo" id="correo" value="${dataNode[4].innerText}" required>
-                        </div>
-                        <div class="col">
-                            <label class="ms-1 mb-1 text-black-50" for="idServicio">Servicio</label>
-                            <select class="form-select" name="id_Servicio" id="idServicio"></select>
                         </div>
                     </div>
                 </form>
@@ -154,10 +149,6 @@ btnNuevo.addEventListener('click', () => {
                 <div class="col mb-2">
                     <label class="ms-1 mb-1 text-black-50" for="correo">Correo</label>
                     <input class="form-control" type="email" name="correo" id="correo" required>
-                </div>
-                <div class="col">
-                    <label class="ms-1 mb-1 text-black-50" for="idServicio">Servicios</label>
-                    <select class="form-select" name="id_Servicio" id="idServicio" required></select>
                 </div>
             </div>
         </form>
