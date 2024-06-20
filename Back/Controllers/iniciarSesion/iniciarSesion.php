@@ -15,16 +15,15 @@
 
         if($stmt -> rowCount() > 0)
         {
-            $mensaje = array (
-                'message' => 'Existe' 
-            );
-            $mensaje_Validado = json_encode($mensaje);
-            echo $mensaje_Validado;
+            $consulta = "SELECT id_Rol FROM usuarios WHERE correo = '".$email."' and password = '".$pass."' ;" ;
+            $stmt = $conexion ->ConsultaCompleja($consulta) ;
+            $datos = json_encode($stmt);
+            echo $datos;
         }
         else
         {
             $mensaje= array (
-                'message' => 'No Existe' 
+                'message' => 'El usuario no existe' 
             );
             $mensaje_Validado = json_encode($mensaje);
             echo $mensaje_Validado;

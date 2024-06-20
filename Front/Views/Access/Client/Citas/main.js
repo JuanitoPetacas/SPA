@@ -13,13 +13,6 @@ fetch(`${GetHost()}/Back/Controllers/clientes/controlador_servicio_cliente.php`)
     .catch(err => {
         SetCatchModal(err);
     })
-fetch(`${GetHost()}/Back/Controllers/clientes/controlador_producto_cliente.php`).then(response => response.json())
-    .then(data => {
-        FillSelect('idProducto', data);
-    })
-    .catch(err => {
-        SetCatchModal(err);
-    })
 
 let btnReservar = document.getElementById('btnReservar');
 btnReservar.addEventListener('click', () => {
@@ -37,6 +30,7 @@ btnReservar.addEventListener('click', () => {
             type: 'POST',
             data: object,
             success: function (data) {
+                console.log(data);
                 SetSucessModal(data);
             },
             error: function (err) {
