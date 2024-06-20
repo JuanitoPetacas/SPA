@@ -4,7 +4,7 @@ CreateCss(`${GetHost()}/Front/Views/Assets/Css/styles.css`);
 SetIcon(`${GetHost()}/Front/Views/Assets/Img/Spa_Logo.webp`);
 SetHeader('header');
 //SetNavBar('nav');
-const jsonButtons = [
+const jsonButtons = [ //window.localStorage.getItem('asideBar');
     { text: 'Gráficos', href: '/Front/Views/Access/Admin/Graficos/', icon: 'bi-graph-up' },
     { text: 'Reportes', href: '/Front/Views/Access/Admin/Reportes/', icon: 'bi-file-spreadsheet-fill' },
     { text: 'Usuarios', href: '/Front/Views/Access/Admin/Usuarios/', icon: 'bi-person-circle' },

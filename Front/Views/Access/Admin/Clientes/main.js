@@ -1,4 +1,4 @@
-import { GetHost, SetTitle, SetError, SetCatchModal, SetSucessModal, SetLoading, FillSelect, SetSelectOpt, ValidForm } from '../../../Assets/Js/globals.functions.js';
+import { GetHost, SetTitle, SetCatchModal, SetSucessModal, SetLoading, ValidForm } from '../../../Assets/Js/globals.functions.js';
 import { } from '../Assets/Helper/Admin.Layout.js';
 import { SetAsideActive } from '../../Utils/asidebar.js';
 import { DefaultOptions, SetColumns, FillTable } from '../Assets/Js/table.js';
@@ -12,19 +12,10 @@ const Columns = [
     'Apellidos',
     'Dirección',
     'Correo',
-    'Servicio',
     ''
 ];
 const btnNuevo = document.getElementById('btnNuevo');
 const dataTable = document.getElementById('dataTable');
-let arrayServicios = [];
-fetch(`${GetHost()}/Back/Controllers/clientes/controlador_servicio_cliente.php`).then(response => response.json())
-    .then(data => {
-        arrayServicios = data;
-    })
-    .catch(err => {
-        SetCatchModal(err);
-    })
 fetch(`${GetHost()}/Back/Controllers/clientes/controlador_Select_cliente.php`).then(response => response.json())
     .then(data => {
         FillTable(dataTable, data, 'edit');
@@ -79,10 +70,6 @@ const SetButtons = () => {
                             <label class="ms-1 mb-1 text-black-50" for="correo">Correo</label>
                             <input class="form-control" type="email" name="correo" id="correo" value="${dataNode[4].innerText}" required>
                         </div>
-                        <div class="col">
-                            <label class="ms-1 mb-1 text-black-50" for="idServicio">Servicio</label>
-                            <select class="form-select" name="id_Servicio" id="idServicio"></select>
-                        </div>
                     </div>
                 </form>
                 `,
@@ -91,8 +78,6 @@ const SetButtons = () => {
                 <button type="button" class="btn btn-info" id="btnEditar">Guardar</button
                 `
             );
-            FillSelect('idServicio', arrayServicios);
-            SetSelectOpt('idServicio', dataNode[5].innerText)
             ShowModal();
             var btnEditar = document.getElementById('btnEditar');
             btnEditar.addEventListener('click', () => {
@@ -155,10 +140,6 @@ btnNuevo.addEventListener('click', () => {
                     <label class="ms-1 mb-1 text-black-50" for="correo">Correo</label>
                     <input class="form-control" type="email" name="correo" id="correo" required>
                 </div>
-                <div class="col">
-                    <label class="ms-1 mb-1 text-black-50" for="idServicio">Servicios</label>
-                    <select class="form-select" name="id_Servicio" id="idServicio" required></select>
-                </div>
             </div>
         </form>
         `,
@@ -167,7 +148,6 @@ btnNuevo.addEventListener('click', () => {
         <button type="button" class="btn btn-primary" id="btnGuardar">Guardar</button>
         `
     );
-    FillSelect('idServicio', arrayServicios);
     ShowModal();
     var btnGuardar = document.getElementById('btnGuardar');
     btnGuardar.addEventListener('click', () => {
