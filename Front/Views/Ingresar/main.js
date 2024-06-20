@@ -20,7 +20,6 @@ ckShowPass.addEventListener("change", () => {
   }
 });
 btnEntrar.addEventListener("click", () => {
-<<<<<<< HEAD
   let form = document.querySelector('form');
   let formData = new FormData(form);
   fetch(`../../../Back/Controllers/iniciarSesion/iniciarSesion.php`, {
@@ -41,26 +40,4 @@ btnEntrar.addEventListener("click", () => {
       }
     })
 
-=======
-  let form = document.querySelector("form");
-  let formData = new FormData(form);
-  fetch(`${GetHost()}/Back/Controllers/iniciarSesion/iniciarSesion.php`, {
-    method: "post",
-    body: formData,
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      let id = data[0].id_Rol;
-      if (id == 1) {
-        // ?  Redirecciono al administrador
-        window.location.href = "../Inicio/index.php";
-      } else if (id == 2) {
-        // ? Redirecciono al Empleado
-        window.location.href = "./index.php";
-      }else{
-        // ? Redirecciono al Cliente
-        window.location.href = "./index.php";
-      }
-    });
->>>>>>> d0e6343ecf9ba039898e4f6d2d80e9d7f6c81cc5
 });
