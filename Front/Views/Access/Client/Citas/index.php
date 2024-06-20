@@ -44,8 +44,24 @@
                             </div>
                             <div class="row">
                                 <div class="col mb-4">
+                                    <label class="fs-5 ms-1 mb-1 text-black-50" for="idCliente">Cliente</label>
+                                    <select class="form-select" name="id_Cliente" id="idCliente" required>
+                                        <option value="">Seleccionar...</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-4">
                                     <label class="fs-5 ms-1 mb-1 text-black-50" for="idServicio">Servicio</label>
                                     <select class="form-select" name="id_Servicio" id="idServicio" required>
+                                        <option value="">Seleccionar...</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-4">
+                                    <label class="fs-5 ms-1 mb-1 text-black-50" for="idProducto">Producto</label>
+                                    <select class="form-select" name="id_Producto" id="idProducto" required>
                                         <option value="">Seleccionar...</option>
                                     </select>
                                 </div>

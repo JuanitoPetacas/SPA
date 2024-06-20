@@ -3,6 +3,7 @@ import {
   ValidForm,
   SetLoading,
   SetError,
+  GetHost,
 } from "../Assets/Js/globals.functions.js";
 import {} from "../Assets/Helper/layout.js";
 SetTitle("Ingresar");
@@ -19,22 +20,24 @@ ckShowPass.addEventListener("change", () => {
   }
 });
 btnEntrar.addEventListener("click", () => {
-    let form = document.querySelector('form');
-    let formData = new FormData(form);
-    fetch(`../../../Back/Controllers/iniciarSesion/iniciarSesion.php`, {
-      method: "post",
-      body: formData
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.message == "Existe")
-          {
-            // ?  le doy permiso para la pagina
-            window.location.href = "../Inicio/index.php"
-          }else{
-            // ? No le doy permiso
-            window.location.href = "./index.php"
-          }
-      })
-
+  let form = document.querySelector("form");
+  let formData = new FormData(form);
+  fetch(`${GetHost()}/Back/Controllers/iniciarSesion/iniciarSesion.php`, {
+    method: "post",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      let id = data[0].id_Rol;
+      if (id == 1) {
+        // ?  Redirecciono al administrador
+        window.location.href = "../Inicio/index.php";
+      } else if (id == 2) {
+        // ? Redirecciono al Empleado
+        window.location.href = "./index.php";
+      }else{
+        // ? Redirecciono al Cliente
+        window.location.href = "./index.php";
+      }
+    });
 });
