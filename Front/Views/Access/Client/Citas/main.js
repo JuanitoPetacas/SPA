@@ -22,7 +22,7 @@ fetch(`${GetHost()}/Back/Controllers/clientes/controlador_id_nombre_cliente.php`
     })
 fetch(`${GetHost()}/Back/Controllers/productos/select_Productos.php`).then(response => response.json())
     .then(data => {
-        FillSelect('idProducto', data);
+        FillSelect('idProducto', data) ;
     })
     .catch(err => {
         SetCatchModal(err);
