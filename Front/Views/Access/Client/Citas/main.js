@@ -44,8 +44,16 @@ btnReservar.addEventListener('click', () => {
             type: 'POST',
             data: object,
             success: function (data) {
+               
+                data =JSON.parse(data)
                 console.log(data);
-                SetSucessModal(data);
+                if (data.access) {
+
+                    SetSucessModal(data.message);    
+                }else{
+                    SetCatchModal(data.message);
+                }
+                
                 ShowModal();
             },
             error: function (err) {

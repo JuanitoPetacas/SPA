@@ -133,10 +133,10 @@ const SetCatchModal = (err) => {
         `
         <div class="text-danger">
             <i class="bi bi-emoji-frown-fill"></i>
-            ERROR IN FETCH
+            ERROR 
         </div>
         `,
-        `Ha ocurrido un fallo con el servidor, te recomendamos <b>recargar la pagina</b><br><span class="fs-6 text-danger">${err}</span>`,
+        `<h5>${err}</h5>`,
         `<button type="button" class="btn btn-primary" id="btnReload">Aceptar</button`
     );
     document.getElementById('btnReload').addEventListener('click', () => {

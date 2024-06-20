@@ -28,7 +28,11 @@ destacando los horarios ocupados y disponibles.
 
     if ($count > 0) {
         // Hora ocupada
-        echo "La fecha que escogiste ya está reservada";
+        $data = array(
+            'access' => false,
+            'message' => 'Cita ocupada lamentablemente'
+        );
+        echo json_encode($data);
     } else {
         // Insertar nueva cita
         $consultaInsertar = "INSERT INTO citas (fecha, hora_Inicio, hora_Fin, id_Cliente, id_Servicio, id_Producto) VALUES (:fecha, :horaInicio, :horaFin, :id_cliente, :id_Servicio, :id_Producto)";
@@ -51,10 +55,14 @@ destacando los horarios ocupados y disponibles.
         // ? Actulizo el Stock
         $actuliazar_Stock = "UPDATE productos SET stock = '".$nuevo_Stock."' WHERE id = '".$id_Producto."' ";
         $stmt_Actualizar = $conexion -> ConsultaCompleja($actuliazar_Stock);
+            // Enviar la respuesta como JSON
+            $data = array(
+                'access' => true,
+                'message' => 'Cita reservada exitoasamente'
+            );
+    echo json_encode($data);
     }
-    // Enviar la respuesta como JSON
-    echo json_encode($stmt);
-    echo "Cita Agendada Correctamente";
+
 } catch (PDOException $e) {
     echo $e->getMessage();
 }
