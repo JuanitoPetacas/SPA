@@ -1,8 +1,8 @@
-import { GetHost, CreateCss, SetIcon, SetHeader, SetNavBar, SetSocialMedia, SetFooter } from '../../../../Assets/Js/globals.functions.js';
+import { GetHost, CreateCss, SetIcon, SetHeader, SetFooter } from '../../../../Assets/Js/globals.functions.js';
 import { SetAside } from '../../../Utils/asidebar.js';
 CreateCss(`${GetHost()}/Front/Views/Assets/Css/styles.css`);
 SetIcon(`${GetHost()}/Front/Views/Assets/Img/Spa_Logo.webp`);
-//SetHeader('header');
+SetHeader('header');
 //SetNavBar('nav');
 const jsonButtons = [
     { text: 'Gráficos', href: '/Front/Views/Access/Admin/Graficos/', icon: 'bi-graph-up' },
