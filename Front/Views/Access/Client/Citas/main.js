@@ -14,13 +14,6 @@ fetch(`${GetHost()}/Back/Controllers/clientes/controlador_servicio_cliente.php`)
     .catch(err => {
         SetCatchModal(err);
     })
-fetch(`${GetHost()}/Back/Controllers/clientes/controlador_id_nombre_cliente.php`).then(response => response.json())
-    .then(data => {
-        FillSelect('idCliente', data);
-    })
-    .catch(err => {
-        SetCatchModal(err);
-    })
 fetch(`${GetHost()}/Back/Controllers/productos/select_Productos.php`).then(response => response.json())
     .then(data => {
         FillSelect('idProducto', data);
@@ -44,17 +37,35 @@ btnReservar.addEventListener('click', () => {
             type: 'POST',
             data: object,
             success: function (data) {
-               
                 data =JSON.parse(data)
                 console.log(data);
                 if (data.access) {
-
-                    SetSucessModal(data.message);    
+                    /**
+                     * Aquí va la URL del controlador de la factura
+                     */
+                    $.ajax({
+                        url: `${GetHost()}/Back/Controllers/ReservaCitas/controlador_insertar_cita.php`,
+                        type: 'POST',
+                        data: object,
+                        success: function (data) {
+                            data =JSON.parse(data)
+                            console.log(data);
+                            if (data.access) {
+                                SetSucessModal(data.message);    
+                            }else{
+                                SetCatchModal(data.message);
+                            }
+                            ShowModal();
+                        },
+                        error: function (err) {
+                            SetCatchModal(err);
+                            ShowModal();
+                        }
+                    });   
                 }else{
                     SetCatchModal(data.message);
+                    ShowModal();
                 }
-                
-                ShowModal();
             },
             error: function (err) {
                 SetCatchModal(err);

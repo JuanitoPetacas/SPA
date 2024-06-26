@@ -104,7 +104,7 @@ const SetSocialMedia = (selector) => {
 };
 const SetFooter = (selector) => {
     document.querySelector(selector).innerHTML = `
-    <div class="col">
+    <div class="col mt-5">
         <div class="row d-flex justify-content-between py-2 px-4">
             <div class="col-auto">
                 <p class="fw-bold mb-0">Front-end by <a class="fw-semibold link-dark text-decoration-none link-opacity-75 link-opacity-100-hover" href="https://github.com/JohnFRivera" target="_blank">John Freddy Rivera Ayala &copy;</a></p>
