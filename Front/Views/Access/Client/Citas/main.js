@@ -19,7 +19,7 @@ btnReservar.addEventListener('click', () => {
     if (ValidForm('frmReservar')) {
         SetLoading(btnReservar);
         var formData = new FormData(document.getElementById('frmReservar'));
-        formData.append('id', window.localStorage.getItem('idUser'))
+        formData.append('id_Cliente', window.localStorage.getItem('idUser'))
         var object = {};
         formData.forEach((value, key) => {
             object[key] = value;
@@ -30,7 +30,18 @@ btnReservar.addEventListener('click', () => {
             type: 'POST',
             data: object,
             success: function (data) {
-                SetSucessModal(data);
+                $.ajax({
+                    url: `${GetHost()}/Back/Controllers/ReservaCitas/controlador_insertar_cita.php`,
+                    type: 'POST',
+                    data: object,
+                    success: function (data) {
+                        SetSucessModal(data);
+                    },
+                    error: function (err) {
+                        SetCatchModal(err);
+                        ShowModal();
+                    }
+                });
             },
             error: function (err) {
                 SetCatchModal(err);

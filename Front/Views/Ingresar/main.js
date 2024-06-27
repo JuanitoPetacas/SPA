@@ -33,7 +33,7 @@ btnEntrar.addEventListener("click", () => {
         // ? Con otro if se valida el id y de acuerdo a el se elige que botones se van usar
         if(data.data[0].rol == 2)
         {
-          
+          console.log();
         }
 
       } else {
