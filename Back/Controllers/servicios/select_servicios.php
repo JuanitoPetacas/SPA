@@ -5,7 +5,7 @@
 
     $conexion -> conectar();
     try{
-        $consulta = "SELECT * FROM servicios";
+        $consulta = "SELECT servicios.id, descripcion_Servicio, duracion, valor_Servicio, CONCAT(terapeutas.nombre , ' ', terapeutas.apellido) as nombre FROM servicios INNER JOIN terapeutas on id_Terapeuta = terapeutas.id ";
         $stmt = $conexion -> ConsultaCompleja($consulta);
         $resultado = $stmt ;
         $data = array();

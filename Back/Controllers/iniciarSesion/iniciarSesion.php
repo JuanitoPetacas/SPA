@@ -1,6 +1,6 @@
 <?php
-    include ('../../Model/conexion.php');
 
+    include ('../../Model/conexion.php');
     $email = $_POST['email'];
     $pass = $_POST['pass'];
     $conexion = new conexion();
@@ -15,10 +15,15 @@
 
         if($stmt -> rowCount() > 0)
         {
-            $consulta = "SELECT id_Rol FROM usuarios WHERE correo = '".$email."' and password = '".$pass."' ;" ;
+            $consulta = "SELECT id as id, CONCAT(nombre, ' ' , apellido) as nombre, id_Rol as rol FROM usuarios WHERE correo = '".$email."' and password = '".$pass."' ;" ;
             $stmt = $conexion ->ConsultaCompleja($consulta) ;
-            $datos = json_encode($stmt);
+            $mensaje = array (
+                'message' => 'Existe',
+                'data' => $stmt
+            );
+            $datos = json_encode($mensaje);
             echo $datos;
+ 
         }
         else
         {
@@ -35,6 +40,7 @@
     } finally {
         $conexion->Desconectar();
     }
-  
+    
+    
 
 ?>
