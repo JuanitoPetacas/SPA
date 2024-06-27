@@ -14,7 +14,8 @@ const Columns = [
 ];
 const btnNuevo = document.getElementById('btnNuevo');
 const dataTable = document.getElementById('dataTable');
-fetch(`${GetHost()}/Back/Controllers/spaEmpelados/sesiones/controlador_select_sesiones.php`).then(response => response.json())
+fetch(`${GetHost()}/Back/Controllers/sesiones/select_Sesiones.php`)
+.then(response => response.json())
 .then(data => {
     FillTable(dataTable, data, 'ambos');
     SetButtons();
