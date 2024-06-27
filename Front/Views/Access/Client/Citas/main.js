@@ -1,6 +1,7 @@
 import { GetHost, SetTitle, SetCatchModal, SetLoading, ValidForm, SetSucessModal, FillSelect } from '../../../Assets/Js/globals.functions.js';
 import { } from '../Assets/Helper/Client.Layout.js';
 import { SetAsideActive } from '../../Utils/asidebar.js';
+import { ShowModal } from '../../../Assets/Js/modal.js';
 SetTitle('Citas');
 SetAsideActive('Citas');
 const inpFecha = document.getElementById('fecha');
@@ -13,7 +14,6 @@ fetch(`${GetHost()}/Back/Controllers/clientes/controlador_servicio_cliente.php`)
     .catch(err => {
         SetCatchModal(err);
     })
-
 let btnReservar = document.getElementById('btnReservar');
 btnReservar.addEventListener('click', () => {
     if (ValidForm('frmReservar')) {
@@ -34,6 +34,7 @@ btnReservar.addEventListener('click', () => {
             },
             error: function (err) {
                 SetCatchModal(err);
+                ShowModal();
             }
         });
         btnReservar.innerHTML = 'Reservar';

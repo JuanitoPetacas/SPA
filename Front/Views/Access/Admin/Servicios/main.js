@@ -69,7 +69,7 @@ const SetButtons = () => {
                             <div class="row row-cols-1 row-cols-md-2">
                                 <div class="col mb-2">
                                     <label class="ms-1 mb-1 text-black-50" for="duracion">Duración</label>
-                                    <input class="form-control" type="text" name="duracion" id="duracion" value="${dataNode[2].innerText}" required>
+                                    <input class="form-control" type="time" name="duracion" id="duracion" value="${dataNode[2].innerText}" required>
                                 </div>
                                 <div class="col mb-2">
                                     <label class="ms-1 mb-1 text-black-50" for="valorServicio">Valor</label>
@@ -196,7 +196,7 @@ btnNuevo.addEventListener('click', ()=>{
                         </div>
                         <div class="col mb-2">
                             <label class="ms-1 mb-1 text-black-50" for="duracion">Duración</label>
-                            <input class="form-control" type="text" name="duracion" id="duracion" required>
+                            <input class="form-control" type="time" name="duracion" id="duracion" required>
                         </div>
                     </div>
                 </div>
