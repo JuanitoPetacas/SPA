@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="row bg-img-login align-content-around">
-            <div class="col-11 col-md-4 col-lg-3 mx-auto">
+            <div class="col-11 col-sm-8 col-md-5 col-lg-3 mx-auto">
                 <div class="bg-body-tertiary rounded-4 border shadow p-3 p-md-4">
                     <h1 class="display-5 fw-normal text-center mb-0">
                         Ingreso
