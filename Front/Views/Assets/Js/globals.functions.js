@@ -44,7 +44,7 @@ const SetNavBar = (selector) => {
         navContent = `
         <div class="col col-md-auto ms-auto align-content-center mt-2 mt-md-0">
             <div class="btn-group">
-            <a class="btn btn-lg btn-outline-primary" href="${GetHost()}/Front/Views/Registrarse/">Registrarse</a>
+                <a class="btn btn-lg btn-outline-primary" href="${GetHost()}/Front/Views/Registrarse/">Registrarse</a>
                 <a class="btn btn-lg btn-primary" href="${GetHost()}/Front/Views/Ingresar/">
                     <i class="bi bi-box-arrow-in-right"></i>
                     Ingresar
