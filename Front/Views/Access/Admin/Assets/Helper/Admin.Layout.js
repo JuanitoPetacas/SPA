@@ -1,10 +1,10 @@
-import { GetHost, CreateCss, SetIcon, SetHeader, SetFooter } from '../../../../Assets/Js/globals.functions.js';
+import { GetHost, CreateCss, SetIcon, SetHeader, SetNavBar, SetSocialMedia, SetFooter } from '../../../../Assets/Js/globals.functions.js';
 import { SetAside } from '../../../Utils/asidebar.js';
 CreateCss(`${GetHost()}/Front/Views/Assets/Css/styles.css`);
 SetIcon(`${GetHost()}/Front/Views/Assets/Img/Spa_Logo.webp`);
-SetHeader('header');
+//SetHeader('header');
 //SetNavBar('nav');
-const jsonButtons = [ //window.localStorage.getItem('asideBar');
+const jsonButtons = [
     { text: 'Gráficos', href: '/Front/Views/Access/Admin/Graficos/', icon: 'bi-graph-up' },
     { text: 'Reportes', href: '/Front/Views/Access/Admin/Reportes/', icon: 'bi-file-spreadsheet-fill' },
     { text: 'Usuarios', href: '/Front/Views/Access/Admin/Usuarios/', icon: 'bi-person-circle' },
@@ -16,3 +16,5 @@ const jsonButtons = [ //window.localStorage.getItem('asideBar');
 ];
 SetAside(jsonButtons);
 SetFooter('footer');
+
+export default jsonButtons
